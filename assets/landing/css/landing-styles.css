@@ -149,6 +149,15 @@ body {
     width: 100%;
 }
 
+.nav-link.active {
+    color: var(--accent-blue);
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background: var(--accent-blue);
+}
+
 .talk-btn {
     background: var(--gradient-primary) !important;
     color: var(--text-primary) !important;
@@ -175,14 +184,40 @@ body {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
 }
 
 .bar {
     width: 25px;
     height: 3px;
     background: var(--text-primary);
-    transition: 0.3s;
+    transition: all 0.3s ease;
     border-radius: 3px;
+    transform-origin: center;
+}
+
+/* Hamburger Animation */
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* Hero Section */
@@ -824,12 +859,18 @@ body {
     overflow: hidden;
     transition: all 0.4s ease;
     position: relative;
+    cursor: pointer;
 }
 
 .section-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--glass-shadow);
     border-color: var(--accent-blue);
+}
+
+.section-card:active {
+    transform: translateY(-5px);
+    transition: all 0.1s ease;
 }
 
 .card-visual {
@@ -984,6 +1025,84 @@ body {
     }
 }
 
+/* References Section */
+.references-section {
+    padding: var(--section-padding);
+    background: var(--bg-primary);
+}
+
+.references-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.references-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.references-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.references-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+
+.reference-category {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.reference-category h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.reference-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.reference-category li {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.reference-category li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-weight: bold;
+}
+
+.reference-category em {
+    color: var(--text-primary);
+    font-style: italic;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero {
@@ -1108,13 +1227,51 @@ body {
     .cta-block {
         order: 7; /* "Start exploring" - seventh */
     }
-    
-    .sections-grid {
+      .sections-grid {
         grid-template-columns: 1fr;
     }
     
     .nav-menu {
-        display: none;
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background: rgba(10, 15, 28, 0.98);
+        backdrop-filter: blur(25px);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border-top: 1px solid var(--glass-border);
+        padding: 2rem 0;
+        gap: 1.5rem;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 0;
+    }
+    
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+        display: block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--accent-blue);
+    }
+    
+    .talk-btn {
+        margin: 1rem 2rem;
+        display: inline-block;
+        text-align: center;
     }
     
     .hamburger {
@@ -1276,11 +1433,11 @@ body {
         grid-row: 1;
         width: 100%;
     }
-    
-    .section-card.wellbeing {
+      .section-card.wellbeing {
         grid-column: 2;
         grid-row: 2;
+        justify-self: center;
+        max-width: 450px;
         width: 100%;
-        justify-self: stretch;
     }
 }

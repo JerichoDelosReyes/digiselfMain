@@ -28,12 +28,11 @@
             <div class="nav-logo">
                 <img src="assets/landing/img/logoWithoutBG.png" alt="Digital Self Logo" class="logo-img">
                 <span>digitalself</span>
-            </div>
-            <ul class="nav-menu" role="menubar">
-                <li role="none"><a href="#understanding" class="nav-link" role="menuitem">Understanding</a></li>
-                <li role="none"><a href="#social-media" class="nav-link" role="menuitem">Social Media</a></li>
-                <li role="none"><a href="#ethics" class="nav-link" role="menuitem">Ethics</a></li>
-                <li role="none"><a href="#wellbeing" class="nav-link" role="menuitem">Well-being</a></li>
+            </div>            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="assets/section1/understanding-overview.html" class="nav-link" role="menuitem">Understanding</a></li>
+                <li role="none"><a href="assets/section2/social-media-overview.html" class="nav-link" role="menuitem">Social Media</a></li>
+                <li role="none"><a href="assets/section3/digital-ethics-overview.html" class="nav-link" role="menuitem">Ethics</a></li>
+                <li role="none"><a href="assets/section4/wellbeing-overview.html" class="nav-link" role="menuitem">Well-being</a></li>
                 <li role="none"><a href="#about" class="nav-link" role="menuitem">About</a></li>
                 <li role="none"><a href="#references" class="nav-link talk-btn" role="menuitem">References</a></li>
             </ul>
@@ -87,8 +86,8 @@
                     <div class="grid-overlay"></div>
                 </div>
             </div>
-        </section><!-- About Section -->
-    <section class="about-section">
+        </section>    <!-- About Section -->
+    <section id="about" class="about-section">
         <div class="container">
             <div class="about-grid">
                 <div class="about-text-blocks">
@@ -172,10 +171,8 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Sections Grid -->
-    <section class="sections-container">
+    </section>    <!-- Sections Grid -->
+    <section id="understanding" class="sections-container">
         <div class="container">
             <div class="sections-header">
                 <h2>Explore the Four Dimensions</h2>
@@ -183,7 +180,7 @@
             </div>
             
             <div class="sections-grid">
-                <div class="section-card understanding">
+                <div id="understanding-card" class="section-card understanding" onclick="window.location.href='assets/section1/understanding-overview.html'">
                     <div class="card-visual">
                         <div class="card-pattern pattern-understanding"></div>
                         <div class="card-icon">⚡</div>
@@ -202,7 +199,7 @@
                     </div>
                 </div>
 
-                <div class="section-card social-media">
+                <div id="social-media" class="section-card social-media" onclick="window.location.href='assets/section2/social-media-overview.html'">
                     <div class="card-visual">
                         <div class="card-pattern pattern-social"></div>
                         <div class="card-icon">🌐</div>
@@ -221,7 +218,7 @@
                     </div>
                 </div>
 
-                <div class="section-card ethics">
+                <div id="ethics" class="section-card ethics" onclick="window.location.href='assets/section3/digital-ethics-overview.html'">
                     <div class="card-visual">
                         <div class="card-pattern pattern-ethics"></div>
                         <div class="card-icon">🛡️</div>
@@ -240,7 +237,7 @@
                     </div>
                 </div>
 
-                <div class="section-card wellbeing">
+                <div id="wellbeing" class="section-card wellbeing" onclick="window.location.href='assets/section4/wellbeing-overview.html'">
                     <div class="card-visual">
                         <div class="card-pattern pattern-wellbeing"></div>
                         <div class="card-icon">💚</div>
@@ -258,22 +255,56 @@
                     </div>
                 </div>
             </div>
+        </div>    </section>
+    </main>
+
+    <!-- References Section -->
+    <section id="references" class="references-section">
+        <div class="container">
+            <div class="references-header">
+                <h2>References & Research</h2>
+                <p>Our research is grounded in peer-reviewed studies, expert insights, and comprehensive analysis of digital identity and mental health.</p>
+            </div>
+            <div class="references-content">
+                <div class="reference-category">
+                    <h3>Digital Identity Research</h3>
+                    <ul>
+                        <li>Turkle, S. (2011). <em>Alone Together: Why We Expect More from Technology and Less from Each Other</em>. Basic Books.</li>
+                        <li>Baym, N. K. (2015). <em>Personal Connections in the Digital Age</em>. Polity Press.</li>
+                        <li>Boyd, D. (2014). <em>It's Complicated: The Social Lives of Networked Teens</em>. Yale University Press.</li>
+                    </ul>
+                </div>
+                <div class="reference-category">
+                    <h3>Social Media & Mental Health</h3>
+                    <ul>
+                        <li>Primack, B. A., et al. (2017). Social media use and perceived social isolation among young adults in the U.S. <em>American Journal of Preventive Medicine</em>, 53(1), 1-8.</li>
+                        <li>Hunt, M. G., et al. (2018). No more FOMO: Limiting social media decreases loneliness and depression. <em>Journal of Social and Clinical Psychology</em>, 37(10), 751-768.</li>
+                        <li>Weinstein, E. (2018). The social media see-saw: Positive and negative influences on adolescents. <em>Pediatrics</em>, 141(3), e20173584.</li>
+                    </ul>
+                </div>
+                <div class="reference-category">
+                    <h3>Digital Ethics & Privacy</h3>
+                    <ul>
+                        <li>Zuboff, S. (2019). <em>The Age of Surveillance Capitalism</em>. PublicAffairs.</li>
+                        <li>Nissenbaum, H. (2009). <em>Privacy in Context: Technology, Policy, and the Integrity of Social Life</em>. Stanford University Press.</li>
+                        <li>Floridi, L. (2014). <em>The Fourth Revolution: How the Infosphere is Reshaping Human Reality</em>. Oxford University Press.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
-    </main>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-text">
-                    <p>&copy; 2025 Digital Self Research Team. All rights reserved.</p>
+                    <p>&copy; 2025 BSCS2E. All rights reserved.</p>
                     <p>Understanding identity in the digital age.</p>
                 </div>
                 <div class="footer-links">
                     <a href="#about" class="footer-link">About</a>
                     <a href="#references" class="footer-link">References</a>
-                    <a href="#" class="footer-link">Privacy Policy</a>
                 </div>
             </div>
         </div>
