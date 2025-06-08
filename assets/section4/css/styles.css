@@ -1,0 +1,1491 @@
+/* Skip Link Styles - Accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Color Variables */
+:root {
+    --primary: #10b981;
+    --primary-light: #34d399;
+    --primary-dark: #059669;
+    --secondary: #6366f1;
+    --accent: #f59e0b;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-light: #9ca3af;
+    --bg-light: #f9fafb;
+    --bg-white: #ffffff;
+    --border-light: #e5e7eb;
+    --border-medium: #d1d5db;
+    --gradient-wellness: linear-gradient(135deg, #10b981, #34d399);
+    --gradient-mindful: linear-gradient(135deg, #6366f1, #8b5cf6);
+    --gradient-balance: linear-gradient(135deg, #f59e0b, #fbbf24);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-white);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+
+.lead-text {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: var(--primary);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+    width: 100%;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.gradient-text {
+    background: var(--gradient-wellness);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Wellness Meter */
+.wellness-meter {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.meter-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 50%;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--primary);
+}
+
+.meter-center span:first-child {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.meter-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.wellness-factors {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.factor {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--bg-white);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.factor:hover,
+.factor:focus {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.factor span:first-child {
+    font-size: 1.5rem;
+}
+
+.factor span:last-child {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.factor.sleep { top: 10%; left: 10%; }
+.factor.focus { top: 10%; right: 10%; }
+.factor.mood { bottom: 10%; left: 10%; }
+.factor.connection { bottom: 10%; right: 10%; }
+
+/* Overview Section */
+.overview-section {
+    padding: 80px 0;
+    background: var(--bg-white);
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.key-impacts {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.impact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.impact-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.impact-icon.positive {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--success);
+}
+
+.impact-icon.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+}
+
+.impact-icon.neutral {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+}
+
+.impact-content h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.impact-content p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Mental Health Spectrum */
+.mental-health-spectrum {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.spectrum-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+}
+
+.spectrum-item:hover {
+    transform: translateX(10px);
+    box-shadow: var(--shadow-md);
+}
+
+.spectrum-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.spectrum-circle.healthy {
+    background: var(--gradient-wellness);
+}
+
+.spectrum-circle.moderate {
+    background: var(--gradient-balance);
+}
+
+.spectrum-circle.problematic {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.spectrum-item h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.spectrum-item p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Topic Sections */
+.topic-section {
+    padding: 80px 0;
+    position: relative;
+}
+
+.topic-section:nth-child(even) {
+    background: var(--bg-light);
+}
+
+.topic-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.topic-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.topic-tag.wellness {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--primary);
+}
+
+.topic-tag.screen-time {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--secondary);
+}
+
+.topic-tag.mindfulness {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+/* Wellness Framework */
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.pillar-card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pillar-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.pillar-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.pillar-card h4 {
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.pillar-practices {
+    margin-top: 1.5rem;
+}
+
+.pillar-practices h5 {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.pillar-practices ul {
+    list-style: none;
+}
+
+.pillar-practices li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.pillar-practices li:last-child {
+    border-bottom: none;
+}
+
+/* Assessment */
+.assessment-container {
+    background: var(--bg-white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    margin-top: 2rem;
+}
+
+.assessment-questions {
+    margin: 2rem 0;
+}
+
+.question-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.question-item:last-child {
+    border-bottom: none;
+}
+
+.question-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+.rating-scale {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.rating-scale input[type="radio"] {
+    display: none;
+}
+
+.rating-scale label {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--border-medium);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.rating-scale input[type="radio"]:checked + label {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.rating-scale label:hover {
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.assessment-results {
+    background: var(--bg-light);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.score-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--gradient-wellness);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.score-number {
+    font-size: 2rem;
+}
+
+.score-total {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Screen Time Insights */
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.insight-card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.insight-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.insight-card h4 {
+    margin-bottom: 1rem;
+    color: var(--secondary);
+}
+
+.research-note {
+    background: rgba(99, 102, 241, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    border-left: 4px solid var(--secondary);
+}
+
+/* Screen Time Tracker */
+.tracker-container {
+    background: var(--bg-white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    margin-top: 2rem;
+}
+
+.activity-categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.category-item label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.category-item input {
+    padding: 0.75rem;
+    border: 2px solid var(--border-medium);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.category-item input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.log-time-btn {
+    background: var(--gradient-wellness);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.log-time-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.time-visualization {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.chart-insights {
+    margin-top: 1rem;
+}
+
+.total-time {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+/* Healthy Limits */
+.limits-guide {
+    margin-top: 3rem;
+}
+
+.rec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.rec-item {
+    background: var(--bg-white);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary);
+}
+
+.rec-item h5 {
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+}
+
+.strategies-list {
+    margin-top: 2rem;
+}
+
+.strategy-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.strategy-item:last-child {
+    border-bottom: none;
+}
+
+.strategy-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.strategy-content h5 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.strategy-content p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Mindfulness Exercises */
+.mindfulness-principles .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.principle-card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.principle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.principle-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.practice-example {
+    background: rgba(139, 92, 246, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    border-left: 4px solid #8b5cf6;
+}
+
+/* Exercise Tabs */
+.exercises-container {
+    background: var(--bg-white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    margin-top: 2rem;
+}
+
+.exercise-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+    color: #8b5cf6;
+    border-bottom-color: #8b5cf6;
+}
+
+.exercise-panel {
+    display: none;
+}
+
+.exercise-panel.active {
+    display: block;
+}
+
+.exercise-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    background: #8b5cf6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.step p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.try-exercise-btn {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.try-exercise-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Mindfulness Tracker */
+.tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.check-in-card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+}
+
+.check-in-card h4 {
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.check-in-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.check-in-card textarea,
+.check-in-card input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-medium);
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: 0.875rem;
+    transition: border-color 0.3s ease;
+}
+
+.check-in-card textarea:focus,
+.check-in-card input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.mood-scale {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.mood-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--border-medium);
+    border-radius: 50%;
+    background: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mood-btn:hover,
+.mood-btn.active {
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.reflection-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.question label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.save-intention-btn,
+.save-reflection-btn {
+    background: var(--gradient-wellness);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.save-intention-btn:hover,
+.save-reflection-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Mental Health Strategies */
+.strategies-section {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.strategies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.strategy-category {
+    background: var(--bg-white);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.category-icon {
+    font-size: 2rem;
+}
+
+.category-header h3 {
+    margin-bottom: 0.5rem;
+}
+
+.category-header p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.strategy-item {
+    margin-bottom: 2rem;
+}
+
+.strategy-item:last-child {
+    margin-bottom: 0;
+}
+
+.strategy-item h4 {
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-size: 1.125rem;
+}
+
+.strategy-techniques {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.technique {
+    padding: 0.75rem;
+    background: var(--bg-light);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.technique strong {
+    color: var(--primary);
+}
+
+/* Emergency Resources */
+.emergency-resources {
+    background: var(--bg-white);
+    border-radius: 1rem;
+    padding: 3rem;
+    margin-top: 4rem;
+    box-shadow: var(--shadow-lg);
+    border: 2px solid #ef4444;
+}
+
+.emergency-resources h3 {
+    color: #ef4444;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.resource-card {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.resource-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.resource-card h4 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.resource-contacts,
+.app-recommendations,
+.professional-resources {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.contact,
+.app,
+.resource {
+    padding: 0.5rem;
+    background: white;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+.contact a,
+.app a,
+.resource a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact a:hover,
+.app a:hover,
+.resource a:hover {
+    text-decoration: underline;
+}
+
+.resource-disclaimer {
+    background: rgba(245, 158, 11, 0.1);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--warning);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+/* Section Navigation */
+.section-navigation {
+    padding: 60px 0;
+    background: var(--bg-light);
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.nav-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: var(--bg-white);
+    border-radius: 1rem;
+    text-decoration: none;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.nav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.nav-card.back {
+    justify-content: flex-start;
+}
+
+.nav-card.home {
+    justify-content: center;
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+    width: 40px;
+    text-align: center;
+}
+
+.nav-content h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    font-size: 1.125rem;
+}
+
+.nav-content p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Footer */
+.section-footer {
+    background: var(--text-primary);
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.footer-section p {
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid #374151;
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-container,
+    .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .pillars-grid,
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .strategies-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .tracker-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--bg-white);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: var(--shadow-lg);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-stats {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .wellness-meter {
+        width: 300px;
+        height: 300px;
+    }
+
+    .activity-categories {
+        grid-template-columns: 1fr;
+    }
+
+    .rec-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exercise-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .nav-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .topic-section {
+        padding: 60px 0;
+    }
+
+    .pillar-card,
+    .insight-card,
+    .strategy-category {
+        padding: 1.5rem;
+    }
+
+    .wellness-meter {
+        width: 250px;
+        height: 250px;
+    }
+
+    .factor {
+        padding: 0.75rem;
+    }
+
+    .factor span:first-child {
+        font-size: 1.25rem;
+    }
+
+    .factor span:last-child {
+        font-size: 0.75rem;
+    }
+}
+
+/* Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.6s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s ease;
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for better accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+a:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-light: #000000;
+        --border-medium: #000000;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+}
