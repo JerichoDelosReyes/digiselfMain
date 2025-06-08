@@ -111,6 +111,11 @@ body {
 .nav-logo a {
     color: inherit;
     text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo a:hover {
+    opacity: 0.8;
 }
 
 .nav-menu {
