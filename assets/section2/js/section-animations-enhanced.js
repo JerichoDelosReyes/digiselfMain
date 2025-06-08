@@ -11,7 +11,94 @@ class SocialMediaSection {
         this.animationFrameId = null;
         this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
+        // Performance monitoring
+        this.performanceMetrics = {
+            initStart: performance.now(),
+            componentLoadTimes: {},
+            animationFrames: 0,
+            lastFrameTime: 0
+        };
+        
+        // Sound feedback system (optional)
+        this.soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+        this.audioContext = null;
+        
+        // Error tracking
+        this.errorLog = [];
+        
         this.init();
+    }
+
+    /**
+     * Initialize audio context for sound feedback
+     */
+    initializeAudio() {
+        if (!this.soundEnabled || this.isReducedMotion) return;
+        
+        try {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (error) {
+            console.warn('Audio context not supported:', error);
+            this.soundEnabled = false;
+        }
+    }
+
+    /**
+     * Play subtle sound feedback
+     */
+    playSound(frequency = 440, duration = 100, volume = 0.1) {
+        if (!this.soundEnabled || !this.audioContext || this.isReducedMotion) return;
+        
+        try {
+            const oscillator = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration / 1000);
+            
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + duration / 1000);
+        } catch (error) {
+            console.warn('Sound playback failed:', error);
+        }
+    }
+
+    /**
+     * Track performance metrics
+     */
+    trackPerformance(componentName, startTime) {
+        const endTime = performance.now();
+        this.performanceMetrics.componentLoadTimes[componentName] = endTime - startTime;
+        
+        // Log if component takes too long to load
+        if (endTime - startTime > 100) {
+            console.warn(`Component ${componentName} took ${(endTime - startTime).toFixed(2)}ms to load`);
+        }
+    }
+
+    /**
+     * Enhanced error handling
+     */
+    handleError(error, context = 'Unknown') {
+        const errorInfo = {
+            message: error.message,
+            context: context,
+            timestamp: new Date().toISOString(),
+            stack: error.stack
+        };
+        
+        this.errorLog.push(errorInfo);
+        console.error(`Error in ${context}:`, error);
+        
+        // Optional: Send to analytics service
+        // this.sendErrorToAnalytics(errorInfo);
     }
 
     /**
@@ -19,26 +106,34 @@ class SocialMediaSection {
      */
     async init() {
         try {
+            this.initializeAudio();
             await this.setupComponents();
             this.setupEventListeners();
             this.setupIntersectionObservers();
-            console.log('Section 2 (Social Media) initialized successfully');
+            
+            const totalInitTime = performance.now() - this.performanceMetrics.initStart;
+            console.log(`Section 2 (Social Media) initialized successfully in ${totalInitTime.toFixed(2)}ms`);
+            
+            // Log performance metrics
+            if (Object.keys(this.performanceMetrics.componentLoadTimes).length > 0) {
+                console.table(this.performanceMetrics.componentLoadTimes);
+            }
         } catch (error) {
-            console.error('Error initializing Section 2:', error);
+            this.handleError(error, 'Section initialization');
         }
-    }
-
-    /**
+    }    /**
      * Setup all interactive components
      */
     async setupComponents() {
         const componentSetups = [
             () => this.initializeNavigation(),
-            () => this.initializePlatformVisuals(),
-            () => this.initializeValidationMetrics(),
-            () => this.initializeComparisonDemo(),
-            () => this.initializeBurnoutIndicators(),
-            () => this.initializeStrategyCards(),
+            () => this.initializeHeroAnimations(),
+            () => this.initializeSocialIdentityModel(),
+            () => this.initializeDigitalImpactMeter(),
+            () => this.initializeChallengeCards(),
+            () => this.initializeStrategiesSection(),
+            () => this.initializeImplementationGuide(),
+            () => this.initializeEmergencyToolkit(),
             () => this.initializeScrollAnimations()
         ];
 
@@ -49,9 +144,7 @@ class SocialMediaSection {
                 console.error('Component setup error:', error);
             }
         }
-    }
-
-    /**
+    }    /**
      * Enhanced navigation with accessibility support
      */
     initializeNavigation() {
@@ -111,6 +204,119 @@ class SocialMediaSection {
         this.eventListeners.set('navbar-scroll', scrollHandler);
 
         this.components.set('navigation', { hamburger, navMenu, navLinks, navbar });
+    }
+
+    /**
+     * Initialize hero section animations and CTA buttons
+     */
+    initializeHeroAnimations() {
+        const ctaButtons = document.querySelectorAll('.cta-btn');
+        
+        ctaButtons.forEach(button => {
+            // Smooth scroll for anchor links
+            if (button.getAttribute('href')?.startsWith('#')) {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = button.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+
+            // Enhanced button interactions
+            button.addEventListener('mouseenter', () => {
+                if (!this.isReducedMotion) {
+                    button.style.transform = 'translateY(-2px) scale(1.02)';
+                }
+            });
+
+            button.addEventListener('mouseleave', () => {
+                if (!this.isReducedMotion) {
+                    button.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+
+        this.components.set('heroAnimations', { ctaButtons });
+    }
+
+    /**
+     * Initialize social identity model with orbital animations
+     */
+    initializeSocialIdentityModel() {
+        const identityModel = document.querySelector('.social-identity-model');
+        if (!identityModel) return;
+
+        const orbits = identityModel.querySelectorAll('.platform-orbit');
+        
+        // Add orbital animation observers
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !this.isReducedMotion) {
+                    orbits.forEach((orbit, index) => {
+                        setTimeout(() => {
+                            orbit.style.animationPlayState = 'running';
+                        }, index * 200);
+                    });
+                    observer.unobserve(identityModel);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        observer.observe(identityModel);
+        this.observers.set('social-identity-model', observer);
+        this.components.set('socialIdentityModel', { identityModel, orbits });
+    }
+
+    /**
+     * Initialize digital impact meter with animated progress bars
+     */
+    initializeDigitalImpactMeter() {
+        const impactMeter = document.querySelector('.challenge-impact-meter');
+        if (!impactMeter) return;
+
+        const impactBars = impactMeter.querySelectorAll('.impact-bar');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    impactBars.forEach((bar, index) => {
+                        setTimeout(() => {
+                            this.animateImpactBar(bar);
+                        }, index * 300);
+                    });
+                    observer.unobserve(impactMeter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(impactMeter);
+        this.observers.set('impact-meter', observer);
+        this.components.set('digitalImpactMeter', { impactMeter, impactBars });
+    }
+
+    /**
+     * Animate individual impact bar
+     */
+    animateImpactBar(bar) {
+        const progressBar = bar.querySelector('.impact-progress');
+        const targetWidth = progressBar.style.width;
+        
+        if (!progressBar || this.isReducedMotion) return;
+
+        // Start from 0 and animate to target
+        progressBar.style.width = '0%';
+        progressBar.style.transition = 'width 1.5s ease-out';
+        
+        setTimeout(() => {
+            progressBar.style.width = targetWidth;
+        }, 100);
     }
 
     /**
@@ -439,12 +645,98 @@ class SocialMediaSection {
     }
 
     /**
+     * Initialize comprehensive challenge cards
+     */
+    initializeChallengeCards() {
+        const startTime = performance.now();
+        
+        try {
+            // Initialize all challenge card types
+            this.initializeValidationCycle();
+            this.initializeComparisonDemo();
+            this.initializeBurnoutSymptoms();
+            this.initializeAnxietyTriggers();
+            this.initializePlatformVisuals();
+            this.initializeValidationMetrics();
+            
+            // Add challenge card hover effects with sound feedback
+            const challengeCards = document.querySelectorAll('.challenge-card, .platform-card, .symptom-card');
+            challengeCards.forEach((card, index) => {
+                this.enhanceCardInteractions(card, index);
+            });
+            
+            this.trackPerformance('challengeCards', startTime);
+        } catch (error) {
+            this.handleError(error, 'Challenge cards initialization');
+        }
+    }
+
+    /**
+     * Enhanced card interactions with sound feedback
+     */
+    enhanceCardInteractions(card, index) {
+        // Throttle hover events for performance
+        let hoverTimeout = null;
+        
+        const handleHover = (isHovering) => {
+            if (this.isReducedMotion) return;
+            
+            clearTimeout(hoverTimeout);
+            hoverTimeout = setTimeout(() => {
+                if (isHovering) {
+                    card.style.transform = 'translateY(-5px) scale(1.02)';
+                    card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+                    
+                    // Subtle hover sound
+                    this.playSound(440 + index * 50, 50, 0.05);
+                } else {
+                    card.style.transform = 'translateY(0) scale(1)';
+                    card.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+                }
+            }, 50);
+        };
+
+        const handleClick = () => {
+            // Click sound feedback
+            this.playSound(660, 100, 0.08);
+            
+            // Visual feedback
+            card.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                card.style.transform = 'translateY(-5px) scale(1.02)';
+            }, 100);
+        };
+
+        // Add event listeners
+        card.addEventListener('mouseenter', () => handleHover(true));
+        card.addEventListener('mouseleave', () => handleHover(false));
+        card.addEventListener('click', handleClick);
+        
+        // Keyboard accessibility
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleClick();
+                card.click();
+            }
+        });
+    }
+    /**
      * Enhanced scroll animations with intersection observer
      */
     initializeScrollAnimations() {
-        const animatedElements = document.querySelectorAll(
-            '.platform-card, .validation-metric, .comparison-card, .strategy-card, .insight-item'
-        );
+        const animatedElements = document.querySelectorAll(`
+            .insight-card, 
+            .research-highlight, 
+            .challenge-card, 
+            .strategy-card, 
+            .path-card,
+            .week-phase,
+            .crisis-strategy,
+            .identity-layer,
+            .impact-bar,
+            .connection-node
+        `.split(',').map(s => s.trim()).join(', '));
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -577,6 +869,184 @@ class SocialMediaSection {
     }
 }
 
+/**
+ * User Preferences Panel for Accessibility Settings
+ */
+class UserPreferencesPanel {
+    constructor(section) {
+        this.section = section;
+        this.panel = null;
+        
+        this.init();
+    }
+
+    /**
+     * Initialize user preferences panel
+     */
+    initializeUserPreferences() {
+        // Create settings panel if it doesn't exist
+        let settingsPanel = document.querySelector('.accessibility-settings');
+        if (!settingsPanel) {
+            settingsPanel = this.createSettingsPanel();
+            document.body.appendChild(settingsPanel);
+        }
+        
+        this.setupSettingsListeners(settingsPanel);
+    }
+
+    /**
+     * Create accessibility settings panel
+     */
+    createSettingsPanel() {
+        const panel = document.createElement('div');
+        panel.className = 'accessibility-settings';
+        panel.innerHTML = `
+            <button class="settings-toggle" aria-label="Open accessibility settings">
+                <span class="sr-only">Settings</span>
+                ⚙️
+            </button>
+            <div class="settings-content" hidden>
+                <h3>Accessibility Settings</h3>
+                <label class="setting-item">
+                    <input type="checkbox" id="reduce-motion" ${this.section.isReducedMotion ? 'checked' : ''}>
+                    <span>Reduce animations</span>
+                </label>
+                <label class="setting-item">
+                    <input type="checkbox" id="sound-feedback" ${this.section.soundEnabled ? 'checked' : ''}>
+                    <span>Sound feedback</span>
+                </label>
+                <label class="setting-item">
+                    <input type="range" id="animation-speed" min="0.5" max="2" step="0.1" value="1">
+                    <span>Animation speed</span>
+                </label>
+                <button class="settings-close">Close</button>
+            </div>
+        `;
+        
+        // Add CSS for settings panel
+        const style = document.createElement('style');
+        style.textContent = `
+            .accessibility-settings {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+            }
+            
+            .settings-toggle {
+                background: rgba(255, 255, 255, 0.9);
+                border: 2px solid #007bff;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .settings-toggle:hover {
+                background: #007bff;
+                color: white;
+                transform: scale(1.1);
+            }
+            
+            .settings-content {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: white;
+                border: 2px solid #007bff;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                min-width: 250px;
+            }
+            
+            .setting-item {
+                display: block;
+                margin: 10px 0;
+                cursor: pointer;
+            }
+            
+            .setting-item input {
+                margin-right: 10px;
+            }
+            
+            .settings-close {
+                background: #007bff;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 10px;
+                width: 100%;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        return panel;
+    }
+
+    /**
+     * Setup settings panel listeners
+     */
+    setupSettingsListeners(panel) {
+        const toggle = panel.querySelector('.settings-toggle');
+        const content = panel.querySelector('.settings-content');
+        const closeBtn = panel.querySelector('.settings-close');
+        
+        // Toggle panel
+        toggle.addEventListener('click', () => {
+            const isHidden = content.hasAttribute('hidden');
+            if (isHidden) {
+                content.removeAttribute('hidden');
+                this.section.playSound(550, 80, 0.06);
+            } else {
+                content.setAttribute('hidden', '');
+            }
+        });
+        
+        // Close panel
+        closeBtn.addEventListener('click', () => {
+            content.setAttribute('hidden', '');
+        });
+        
+        // Reduce motion setting
+        const reduceMotionInput = panel.querySelector('#reduce-motion');
+        reduceMotionInput.addEventListener('change', (e) => {
+            this.section.isReducedMotion = e.target.checked;
+            localStorage.setItem('reduceMotion', this.section.isReducedMotion);
+            this.section.playSound(440, 100, 0.06);
+        });
+        
+        // Sound feedback setting
+        const soundInput = panel.querySelector('#sound-feedback');
+        soundInput.addEventListener('change', (e) => {
+            this.section.soundEnabled = e.target.checked;
+            localStorage.setItem('soundEnabled', this.section.soundEnabled);
+            if (this.section.soundEnabled && this.section.audioContext) {
+                this.section.playSound(660, 150, 0.08);
+            }
+        });
+        
+        // Animation speed setting
+        const speedInput = panel.querySelector('#animation-speed');
+        speedInput.addEventListener('input', (e) => {
+            const speed = parseFloat(e.target.value);
+            document.documentElement.style.setProperty('--animation-speed', speed);
+            localStorage.setItem('animationSpeed', speed);
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !content.hasAttribute('hidden')) {
+                content.setAttribute('hidden', '');
+            }
+        });
+    }
+}
+
 // CSS animations to be added via JavaScript if not in CSS
 const socialMediaAnimations = `
     @keyframes bounceIn {
@@ -601,24 +1071,116 @@ const socialMediaAnimations = `
         50% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.8); }
     }
 
+    @keyframes pulseHighlight {
+        0%, 100% { background: rgba(79, 70, 229, 0.1); }
+        50% { background: rgba(79, 70, 229, 0.3); }
+    }
+
+    @keyframes symptomSelect {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); background: rgba(16, 185, 129, 0.2); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes badgePulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); box-shadow: 0 0 15px rgba(79, 70, 229, 0.4); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes goalComplete {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); background: rgba(16, 185, 129, 0.2); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes actionActivate {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); background: rgba(239, 68, 68, 0.1); }
+        100% { transform: scale(1); }
+    }
+
+    @keyframes urgencyPulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.2); opacity: 0.8; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
     .animate-in {
         animation: slideInUp 0.6s ease-out forwards;
     }
 
-    .comparison-card.revealed .hidden-reality {
-        display: block;
-        animation: fadeInScale 0.5s ease-out;
+    .card-visible {
+        animation: fadeInScale 0.8s ease-out forwards;
     }
 
-    .strategy-card:hover {
-        animation: pulseGlow 1s ease-in-out infinite;
+    .path-visible {
+        animation: slideInUp 0.6s ease-out forwards;
+    }
+
+    .week-visible {
+        animation: fadeInScale 0.8s ease-out forwards;
+    }
+
+    .crisis-visible {
+        animation: slideInUp 0.6s ease-out forwards;
+    }
+
+    .trigger-visible {
+        animation: bounceIn 0.6s ease-out forwards;
+    }
+
+    .cycle-step.active {
+        transform: scale(1.1);
+        background: rgba(79, 70, 229, 0.2);
+        border-color: var(--primary);
+    }
+
+    .framework-step.active {
+        background: rgba(79, 70, 229, 0.1);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    .goal.completed {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        text-decoration: line-through;
+    }
+
+    .action-used {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        border-color: var(--success);
+    }
+
+    .symptom.selected {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--danger);
+        border-color: var(--danger);
+    }
+
+    .reality-revealed .reality-column {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    .reality-revealed .highlight-column {
+        opacity: 0.6;
+        transform: scale(0.95);
     }
 
     @media (prefers-reduced-motion: reduce) {
         .animate-in,
-        .comparison-card.revealed .hidden-reality,
-        .strategy-card:hover {
+        .card-visible,
+        .path-visible,
+        .week-visible,
+        .crisis-visible,
+        .trigger-visible,
+        .cycle-step.active,
+        .framework-step.active {
             animation: none;
+            transform: none;
         }
     }
 `;
@@ -644,3 +1206,7 @@ if (!document.querySelector('#section2-animations')) {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = SocialMediaSection;
 }
+
+// Initialize user preferences panel
+window.userPreferencesPanel = new UserPreferencesPanel(window.socialMediaSection);
+window.userPreferencesPanel.initializeUserPreferences();
