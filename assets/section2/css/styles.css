@@ -2438,346 +2438,92 @@ body {
     box-shadow: 0 0 10px rgba(79, 70, 229, 0.3);
 }
 
-/* Modern Casual References Section */
+/* Simplified References Section */
 .references-section {
-    margin-top: 3rem;
-    padding: 2.5rem 0;
-    background: rgba(20, 25, 36, 0.4);
-    border-radius: 12px;
-    border: 1px solid rgba(79, 70, 229, 0.15);
-    position: relative;
-    overflow: hidden;
+    padding: 4rem 0;
+    background: var(--bg-primary);
 }
 
-.references-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.3), transparent);
-}
-
-.references-section::after {
-    content: '📚';
-    position: absolute;
-    top: 1.5rem;
-    right: 2rem;
-    font-size: 1.2rem;
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-.references-section .section-header {
+.references-header {
     text-align: center;
-    margin-bottom: 2.5rem;
-    padding: 0 2rem;
+    margin-bottom: 4rem;
 }
 
-.references-section .section-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(79, 70, 229, 0.1);
-    border: 1px solid rgba(79, 70, 229, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    transition: all 0.2s ease;
-}
-
-.references-section .section-badge:hover {
-    transform: translateY(-1px);
-    background: rgba(79, 70, 229, 0.15);
-}
-
-.references-section .section-badge .badge-icon {
-    font-size: 1rem;
-}
-
-.references-section h3 {
+.references-header h2 {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 1rem;
-    font-weight: 600;
 }
 
-.references-section .section-intro {
+.references-header p {
+    font-size: 1.2rem;
     color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.6;
     max-width: 600px;
     margin: 0 auto;
-    font-weight: 400;
+    line-height: 1.6;
 }
 
-.references-container {
-    max-width: 900px;
+.references-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
-.reference-item {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(79, 70, 229, 0.1);
-    border-radius: 12px;
-    transition: all 0.2s ease;
+.reference-category {
+    background: rgba(26, 31, 46, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.reference-category:hover {
+    transform: translateY(-5px);
+    border-color: rgba(79, 70, 229, 0.4);
+    background: rgba(26, 31, 46, 0.9);
+}
+
+.reference-category h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.reference-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.reference-category li {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
     position: relative;
 }
 
-.reference-item::before {
-    content: '';
+.reference-category li::before {
+    content: '→';
     position: absolute;
-    top: 0;
     left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(79, 70, 229, 0.2), transparent);
-}
-
-.reference-item:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(79, 70, 229, 0.25);
-    transform: translateY(-2px);
-}
-
-.reference-number {
-    flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    background: linear-gradient(135deg, var(--accent-primary), rgba(79, 70, 229, 0.8));
-    color: white;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
-}
-
-.reference-content {
-    flex: 1;
-    line-height: 1.6;
-}
-
-.reference-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 0.75rem;
-    gap: 1rem;
-}
-
-.reference-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.reference-authors {
-    font-weight: 600;
-    color: var(--text-primary);
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.reference-authors::before {
-    content: '👤';
-    font-size: 0.8rem;
-    opacity: 0.6;
-}
-
-.reference-year {
     color: var(--accent-primary);
-    font-weight: 500;
-    font-size: 0.85rem;
-    background: rgba(79, 70, 229, 0.1);
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    display: inline-block;
-    margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
-.reference-title {
-    color: var(--text-primary);
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-}
-
-.reference-journal-container {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.01);
-    border-radius: 6px;
-    border-left: 2px solid var(--accent-primary);
-}
-
-.reference-journal-icon {
-    font-size: 1rem;
-    opacity: 0.7;
-}
-
-.reference-journal {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    flex: 1;
-}
-
-.reference-journal em {
+.reference-category em {
     color: var(--text-primary);
     font-style: italic;
-    font-weight: 500;
-}
-
-.reference-journal .volume {
-    font-weight: 600;
-    color: var(--accent-primary);
-    background: rgba(79, 70, 229, 0.1);
-    padding: 0.1rem 0.3rem;
-    border-radius: 3px;
-    margin: 0 0.2rem;
-}
-
-.reference-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-end;
-}
-
-.reference-doi {
-    margin-bottom: 0.5rem;
-}
-
-.reference-doi a {
-    color: var(--accent-primary);
-    text-decoration: none;
-    font-size: 0.8rem;
-    transition: all 0.2s ease;
-    padding: 0.3rem 0.6rem;
-    border-radius: 6px;
-    background: rgba(79, 70, 229, 0.08);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    border: 1px solid rgba(79, 70, 229, 0.15);
-    font-weight: 500;
-}
-
-.reference-doi a::before {
-    content: '🔗';
-    font-size: 0.7rem;
-}
-
-.reference-doi a:hover {
-    color: var(--text-primary);
-    background: rgba(79, 70, 229, 0.15);
-    transform: translateX(-1px);
-}
-
-.citation-tools {
-    display: flex;
-    gap: 0.4rem;
-}
-
-.citation-btn {
-    padding: 0.3rem 0.6rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 5px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.75rem;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.citation-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--text-primary);
-}
-
-.citation-btn.apa::before { content: '📋'; }
-.citation-btn.bibtex::before { content: '📝'; }
-
-.references-stats {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin: 2.5rem auto 1.5rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
-    border: 1px solid rgba(79, 70, 229, 0.08);
-    max-width: 500px;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--accent-primary);
-    display: block;
-}
-
-.stat-label {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin-top: 0.2rem;
-}
-
-.references-note {
-    max-width: 700px;
-    margin: 2.5rem auto 0;
-    padding: 1.5rem;
-    background: rgba(16, 185, 129, 0.05);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    border-radius: 10px;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-}
-
-.note-icon {
-    font-size: 1.2rem;
-    margin-top: 0.1rem;
-    flex-shrink: 0;
-}
-
-.references-note p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-.references-note strong {
-    color: var(--text-primary);
-    font-weight: 600;
 }
 
 /* Section Navigation Styles - Modern Dark Theme */
