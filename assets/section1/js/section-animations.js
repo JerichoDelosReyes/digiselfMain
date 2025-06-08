@@ -54,7 +54,8 @@ function initializeIdentityModel() {
     
     if (!identityCircles.length) return;
 
-    identityCircles.forEach(circle => {        circle.addEventListener('mouseenter', () => {
+    identityCircles.forEach(circle => {
+        circle.addEventListener('mouseenter', () => {
             // Highlight the hovered circle
             circle.style.transform = circle.classList.contains('real-self') 
                 ? 'translateX(-50%) scale(1.15)' 
@@ -68,7 +69,8 @@ function initializeIdentityModel() {
                     otherCircle.style.opacity = '0.5';
                 }
             });
-              // Pulse the center
+            
+            // Pulse the center
             if (identityCenter) {
                 identityCenter.style.transform = 'translate(-50%, -50%) scale(1.1)';
                 identityCenter.style.boxShadow = '0 0 30px rgba(79, 70, 229, 0.6)';
@@ -77,7 +79,8 @@ function initializeIdentityModel() {
             // Show tooltip
             showIdentityTooltip(circle);
         });
-          circle.addEventListener('mouseleave', () => {
+        
+        circle.addEventListener('mouseleave', () => {
             // Reset transformations
             circle.style.transform = circle.classList.contains('real-self') 
                 ? 'translateX(-50%) scale(1)' 
@@ -89,7 +92,8 @@ function initializeIdentityModel() {
             identityCircles.forEach(otherCircle => {
                 otherCircle.style.opacity = '1';
             });
-              // Reset center
+            
+            // Reset center
             if (identityCenter) {
                 identityCenter.style.transform = 'translate(-50%, -50%) scale(1)';
                 identityCenter.style.boxShadow = '';

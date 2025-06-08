@@ -1085,6 +1085,7 @@ function initializeAccessibilityFeatures() {
         }
     });
     
+    
     // Announce page changes for screen readers
     function announcePageChange(message) {
         const announcement = document.createElement('div');
