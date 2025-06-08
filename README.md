@@ -193,12 +193,7 @@ digiselfMain/
 
 ## 👥 Team
 
-**BSCS2E - University of Technology Sydney**
-
-- **Project Lead & Development**: Implementation and technical architecture
-- **Content Research**: Evidence-based research and educational material
-- **Design & UX**: User experience design and accessibility implementation
-- **Quality Assurance**: Testing, optimization, and performance monitoring
+**BSCS2E - CvSU Imus**
 
 ---
 
