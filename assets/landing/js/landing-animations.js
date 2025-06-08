@@ -2,6 +2,28 @@
 // Updated for new modular text block system and enhanced visualizations
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, starting initialization...');
+    
+    // Test: Visual indicator that the script is running
+    const testIndicator = document.createElement('div');
+    testIndicator.textContent = 'JavaScript loaded!';
+    testIndicator.style.cssText = `
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: red;
+        color: white;
+        padding: 10px;
+        z-index: 99999;
+        font-size: 14px;
+    `;
+    document.body.appendChild(testIndicator);
+    
+    // Remove indicator after 3 seconds
+    setTimeout(() => {
+        testIndicator.remove();
+    }, 3000);
+    
     initializeNavigation();
     initializeModularTextBlocks();
     initializeDigitalIdentityVisualization();
@@ -31,24 +53,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Enhanced Navigation with new color scheme
 function initializeNavigation() {
+    console.log('=== NAVIGATION DEBUG START ===');
+    
+    // Simple test: Change hamburger color when script runs
     const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navbar = document.querySelector('.navbar');
-
-    // Mobile menu toggle with improved animations
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            const isActive = hamburger.classList.contains('active');
-            
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', !isActive);
-            
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = isActive ? 'auto' : 'hidden';
+    
+    if (hamburger) {
+        hamburger.style.backgroundColor = 'red';
+        hamburger.style.padding = '10px';
+        console.log('✅ Hamburger found and styled red');
+        
+        // Test event listener with simple alert
+        hamburger.addEventListener('click', function() {
+            alert('🎉 HAMBURGER WORKS! Click detected successfully.');
+            console.log('🎯 CLICK EVENT FIRED!');
         });
+        
+        console.log('✅ Event listener added successfully');
+    } else {
+        console.error('❌ HAMBURGER NOT FOUND!');
     }
+    
+    console.log('=== NAVIGATION DEBUG END ===');
+}
 
     // Close mobile menu when clicking on a link
     navLinks.forEach(link => {
@@ -71,9 +98,7 @@ function initializeNavigation() {
             hamburger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = 'auto';
         }
-    });
-
-    // Close menu with escape key
+    });    // Close menu with escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
             hamburger.classList.remove('active');
@@ -81,6 +106,30 @@ function initializeNavigation() {
             hamburger.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = 'auto';
             hamburger.focus();
+        }
+        
+        // Focus trapping within mobile menu
+        if (navMenu && navMenu.classList.contains('active') && e.key === 'Tab') {
+            const focusableElements = navMenu.querySelectorAll('.nav-link');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+            
+            if (e.shiftKey) {
+                // Shift + Tab
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    hamburger.focus();
+                }
+            } else {
+                // Tab
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    hamburger.focus();
+                } else if (document.activeElement === hamburger) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
         }
     });
 
