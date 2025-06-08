@@ -1085,13 +1085,6 @@ function initializeAccessibilityFeatures() {
         }
     });
     
-    // Skip link functionality
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-link';
-    skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, document.body.firstChild);
-    
     // Announce page changes for screen readers
     function announcePageChange(message) {
         const announcement = document.createElement('div');
