@@ -1247,3 +1247,40 @@ body {
         animation: none !important;
     }
 }
+
+/* Large screens - center wellbeing card in full screen mode */
+@media (min-width: 1200px) {
+    .sections-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .section-card.understanding {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+    }
+    
+    .section-card.social-media {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+    }
+    
+    .section-card.ethics {
+        grid-column: 3;
+        grid-row: 1;
+        width: 100%;
+    }
+    
+    .section-card.wellbeing {
+        grid-column: 2;
+        grid-row: 2;
+        width: 100%;
+        justify-self: stretch;
+    }
+}
