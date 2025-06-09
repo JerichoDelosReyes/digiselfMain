@@ -1314,28 +1314,7 @@ class DigitalSelfSection1 {
         this.setupReducedMotionSupport();
     }
 
-    /**
-     * Setup focus management
-     */
-    setupFocusManagement() {
-        // Skip links for screen readers
-        const skipLink = document.createElement('a');
-        skipLink.href = '#main-content';
-        skipLink.className = 'skip-link';
-        skipLink.textContent = 'Skip to main content';
-        document.body.insertBefore(skipLink, document.body.firstChild);
-        
-        // Focus indicators
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-                document.body.classList.add('using-keyboard');
-            }
-        });
-        
-        document.addEventListener('mousedown', () => {
-            document.body.classList.remove('using-keyboard');
-        });
-    }
+
 
     /**
      * Setup screen reader support
@@ -1370,31 +1349,6 @@ class DigitalSelfSection1 {
     }
 
     /**
-     * Setup high contrast mode
-     */
-    setupHighContrastMode() {
-        // Detect high contrast preference
-        const contrastQuery = window.matchMedia('(prefers-contrast: high)');
-        
-        const updateContrast = (e) => {
-            document.body.classList.toggle('high-contrast', e.matches);
-        };
-        
-        updateContrast(contrastQuery);
-        contrastQuery.addEventListener('change', updateContrast);
-        
-        // Manual toggle
-        const contrastToggle = document.createElement('button');
-        contrastToggle.className = 'contrast-toggle';
-        contrastToggle.setAttribute('aria-label', 'Toggle high contrast mode');
-        contrastToggle.innerHTML = '<i class="fas fa-adjust"></i>';
-        
-        contrastToggle.addEventListener('click', () => {
-            document.body.classList.toggle('high-contrast');
-        });
-        
-        document.querySelector('.navbar')?.appendChild(contrastToggle);
-    }
 
     /**
      * Setup reduced motion support
