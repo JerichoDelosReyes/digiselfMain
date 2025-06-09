@@ -203,4 +203,3 @@ digiselfMain/
 *"In our digital age, understanding ourselves means understanding our relationship with technology. This project is a step toward more mindful, authentic, and healthy digital lives."*
 
 **© 2025 BSCS2E - Digital Self Project. Educational content for understanding digital identity and social media psychology.**
->>>>>>> 0ced6d3ac704d42bbad128e4814c48421e1d4296
