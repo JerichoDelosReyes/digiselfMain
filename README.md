@@ -1,6 +1,3 @@
-# digiselfMain
-A UTS project.
-=======
 # Digital Self Project 🌐
 
 > Understanding and navigating identity in the digital age through evidence-based insights and practical strategies.
