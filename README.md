@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # digiselfMain
 A UTS project.
 =======
