@@ -1530,7 +1530,6 @@ body.menu-open {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-subtle);
     padding: 3rem 0 1rem;
-    margin-top: 4rem;
 }
 
 .footer-content {

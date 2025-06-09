@@ -1270,7 +1270,6 @@ body {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-subtle);
     padding: 3rem 0 1rem;
-    margin-top: 4rem;
 }
 
 .footer-content {
@@ -1285,6 +1284,7 @@ body {
     margin-bottom: 1rem;
     font-size: 1.1rem;
     font-weight: 600;
+    font-family: var(--font-primary);
 }
 
 .footer-section p {
@@ -2827,6 +2827,7 @@ body {
     margin-bottom: 0.5rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     transition: color 0.3s ease;
+    font-family: var(--font-primary);
 }
 
 .nav-card:hover .nav-content h3 {

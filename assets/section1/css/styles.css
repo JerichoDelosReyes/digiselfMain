@@ -1449,35 +1449,70 @@ body {
 
 /* Section Navigation - Enhanced Responsive */
 .section-navigation {
-    padding: var(--gap-xl) 0;
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--glass-border);
+    padding: 3rem 0;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.section-navigation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, rgba(64, 81, 144, 0.15) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .nav-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--gap-md);
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .nav-card {
     display: flex;
     align-items: center;
-    gap: var(--gap-md);
-    padding: var(--gap-lg);
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     text-decoration: none;
     color: inherit;
-    transition: all var(--duration-normal) ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nav-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-card:hover::before {
+    left: 100%;
 }
 
 .nav-card:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-4px);
+    background: linear-gradient(135deg, rgba(64, 81, 144, 0.3) 0%, rgba(45, 56, 98, 0.3) 100%);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(100, 149, 237, 0.3);
 }
 
 .nav-card.back {
@@ -1486,56 +1521,111 @@ body {
 
 .nav-card.next {
     justify-content: flex-end;
+    text-align: right;
 }
 
 .nav-icon {
-    font-size: var(--text-2xl);
-    font-weight: 700;
-    color: var(--accent-blue);
+    font-size: 2rem;
+    font-weight: 300;
+    color: #6495ed;
     flex-shrink: 0;
+    background: linear-gradient(135deg, #6495ed, #4169e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(100, 149, 237, 0.3);
+    transition: all 0.3s ease;
+}
+
+.nav-card:hover .nav-icon {
+    transform: scale(1.2);
+    text-shadow: 0 0 30px rgba(100, 149, 237, 0.5);
 }
 
 .nav-content h3 {
-    font-size: var(--text-lg);
+    font-size: 1.25rem;
     font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: color 0.3s ease;
+    font-family: var(--font-primary);
+}
+
+.nav-card:hover .nav-content h3 {
+    color: #e6f3ff;
 }
 
 .nav-content p {
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    line-height: 1.4;
+    transition: color 0.3s ease;
 }
 
+.nav-card:hover .nav-content p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Desktop Layout */
 @media (min-width: 768px) {
     .nav-grid {
         grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    
+    .nav-card {
+        min-height: 120px;
     }
 }
 
-/* Footer - Enhanced Responsive */
+/* Enhanced Hover Effects for Desktop */
+@media (min-width: 1024px) {
+    .nav-card:hover {
+        transform: translateY(-6px) scale(1.03);
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .nav-card {
+        transition: none;
+    }
+    
+    .nav-card:hover {
+        transform: none;
+    }
+    
+    .nav-card::before,
+    .nav-card:hover::before {
+        display: none;
+    }
+}
+
+/* Footer Styles */
 .section-footer {
-    background: var(--bg-primary);
-    padding: var(--gap-xl) 0 var(--gap-lg);
-    border-top: 1px solid var(--glass-border);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-subtle);
+    padding: 3rem 0 1rem;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--gap-lg);
-    margin-bottom: var(--gap-lg);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .footer-section h3 {
-    font-size: var(--text-lg);
-    font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--gap-sm);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: var(--font-primary);
 }
 
 .footer-section p {
-    font-size: var(--text-sm);
     color: var(--text-secondary);
     line-height: 1.6;
 }
@@ -1543,7 +1633,6 @@ body {
 .footer-section ul {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 .footer-section ul li {
@@ -1553,28 +1642,34 @@ body {
 .footer-section ul li a {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: var(--text-sm);
-    transition: color var(--duration-normal) ease;
+    transition: color 0.3s ease;
 }
 
 .footer-section ul li a:hover {
-    color: var(--accent-blue);
+    color: var(--text-primary);
 }
 
 .footer-bottom {
-    padding-top: var(--gap-md);
-    border-top: 1px solid var(--glass-border);
     text-align: center;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 1rem;
 }
 
 .footer-bottom p {
-    font-size: var(--text-xs);
     color: var(--text-muted);
+    font-size: 0.875rem;
 }
 
-@media (min-width: 768px) {
+/* Footer Responsive Design */
+@media (max-width: 768px) {
     .footer-content {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .section-footer {
+        padding: 2rem 0 1rem;
     }
 }
 
