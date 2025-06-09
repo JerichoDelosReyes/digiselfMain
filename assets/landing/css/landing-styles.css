@@ -389,20 +389,54 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    
+    /* Link-specific styling to maintain button appearance */
+    text-decoration: none !important;
+    color: inherit !important;
+    
+    /* Additional link resets */
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background-clip: padding-box;
+}
+
+/* All link states */
+.cta-block:link,
+.cta-block:visited,
+.cta-block:hover,
+.cta-block:active,
+.cta-block:focus {
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
 .cta-block:hover {
-    background: var(--accent-blue);
+    background: var(--accent-blue) !important;
+}
+
+.cta-block:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+.cta-block:active {
+    transform: translateY(2px);
 }
 
 .cta-content {
     text-align: center;
+    pointer-events: none; /* Prevent nested elements from interfering with link behavior */
 }
 
 .cta-content h3 {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: inherit !important;
+    pointer-events: none;
 }
 
 .arrow {
@@ -410,6 +444,7 @@ body {
     font-weight: bold;
     color: var(--accent-blue);
     transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 .cta-block:hover .arrow {

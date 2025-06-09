@@ -16,7 +16,7 @@
     top: 6px;
 }
 
-/* Color Variables */
+/* Color Variables - Light Mode */
 :root {
     --primary: #10b981;
     --primary-light: #34d399;
@@ -40,6 +40,38 @@
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f9fafb;
+        --text-secondary: #d1d5db;
+        --text-light: #9ca3af;
+        --bg-light: #111827;
+        --bg-white: #1f2937;
+        --border-light: #374151;
+        --border-medium: #4b5563;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Manual Dark Mode Override */
+[data-theme="dark"] {
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-light: #9ca3af;
+    --bg-light: #111827;
+    --bg-white: #1f2937;
+    --border-light: #374151;
+    --border-medium: #4b5563;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
 /* Base Styles */
@@ -93,6 +125,17 @@ h5 { font-size: 1.25rem; }
     border-bottom: 1px solid var(--border-light);
     z-index: 1000;
     transition: all 0.3s ease;
+}
+
+/* Dark mode navigation */
+@media (prefers-color-scheme: dark) {
+    .navbar {
+        background: rgba(31, 41, 55, 0.95);
+    }
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(31, 41, 55, 0.95);
 }
 
 .nav-container {
@@ -181,6 +224,54 @@ h5 { font-size: 1.25rem; }
     background: var(--text-primary);
     margin: 3px 0;
     transition: 0.3s;
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 2px solid var(--border-light);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.dark-mode-toggle:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.dark-mode-toggle:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+[data-theme="dark"] .toggle-icon {
+    transform: rotate(180deg);
+}
+
+[data-theme="dark"] .toggle-icon::before {
+    content: '☀️';
+}
+
+/* Dark mode toggle icon switching */
+.toggle-icon::before {
+    content: '🌙';
+}
+
+[data-theme="dark"] .toggle-icon::before {
+    content: '☀️';
 }
 
 /* Hero Section */
@@ -1299,6 +1390,54 @@ h5 { font-size: 1.25rem; }
     font-size: 0.875rem;
 }
 
+/* Dark mode specific component styles */
+@media (prefers-color-scheme: dark) {
+    .section-badge {
+        background: rgba(16, 185, 129, 0.1);
+    }
+    
+    .hero {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    }
+    
+    .overview-card,
+    .pillar-card,
+    .insight-card,
+    .strategy-card,
+    .tracker-card,
+    .resource-card {
+        background: var(--bg-white);
+        border: 1px solid var(--border-light);
+    }
+    
+    .nav-menu {
+        background-color: var(--bg-white);
+    }
+}
+
+[data-theme="dark"] .section-badge {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--primary);
+}
+
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+[data-theme="dark"] .overview-card,
+[data-theme="dark"] .pillar-card,
+[data-theme="dark"] .insight-card,
+[data-theme="dark"] .strategy-card,
+[data-theme="dark"] .tracker-card,
+[data-theme="dark"] .resource-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
+}
+
+[data-theme="dark"] .nav-menu {
+    background-color: var(--bg-white);
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero-container,
@@ -1327,6 +1466,17 @@ h5 { font-size: 1.25rem; }
 }
 
 @media (max-width: 768px) {
+    .nav-container {
+        padding: 0 15px;
+    }
+    
+    .dark-mode-toggle {
+        width: 35px;
+        height: 35px;
+        margin-right: 0.5rem;
+        font-size: 1rem;
+    }
+    
     .nav-menu {
         position: fixed;
         left: -100%;

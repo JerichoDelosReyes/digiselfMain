@@ -28,8 +28,7 @@
     <nav class="navbar" role="navigation" aria-label="Main navigation">        <div class="nav-container">            <div class="nav-logo">
                 <img src="../landing/img/logoWithoutBG.png" alt="Digital Self Logo" class="logo-img">
                 <a href="../../index.html" aria-label="Digital Self Project - Home">digitalself</a>
-            </div>
-            <ul class="nav-menu" role="menubar">
+            </div>            <ul class="nav-menu" role="menubar">
                 <li role="none"><a href="#wellness" class="nav-link" role="menuitem">Digital Wellness</a></li>
                 <li role="none"><a href="#screen-time" class="nav-link" role="menuitem">Screen Time</a></li>
                 <li role="none"><a href="#mindfulness" class="nav-link" role="menuitem">Mindfulness</a></li>
@@ -946,9 +945,66 @@
             <div class="footer-bottom">
                 <p>&copy; 2025 BSCS2E. Educational content for understanding digital well-being.</p>
             </div>
-        </div>
-    </footer>
+        </div>    </footer>
 
+    <script>
+        // Dark mode toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.querySelector('.dark-mode-toggle');
+            const body = document.body;
+            
+            // Check for saved theme preference or default to auto-detect
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Apply initial theme
+            if (savedTheme) {
+                body.setAttribute('data-theme', savedTheme);
+            } else if (prefersDark) {
+                body.setAttribute('data-theme', 'dark');
+            }
+            
+            // Update toggle icon based on current theme
+            function updateToggleIcon() {
+                const currentTheme = body.getAttribute('data-theme');
+                const icon = darkModeToggle.querySelector('.toggle-icon');
+                if (currentTheme === 'dark') {
+                    icon.textContent = '☀️';
+                    darkModeToggle.setAttribute('aria-label', 'Switch to light mode');
+                } else {
+                    icon.textContent = '🌙';
+                    darkModeToggle.setAttribute('aria-label', 'Switch to dark mode');
+                }
+            }
+            
+            // Initial icon update
+            updateToggleIcon();
+            
+            // Toggle theme on button click
+            darkModeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateToggleIcon();
+                
+                // Add a small animation effect
+                darkModeToggle.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    darkModeToggle.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    body.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                    updateToggleIcon();
+                }
+            });
+        });
+    </script>
     <script src="js/section-animations-enhanced.js"></script>
 </body>
 </html>
