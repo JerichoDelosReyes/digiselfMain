@@ -32,14 +32,17 @@ class DigitalEthicsSection {
     /**
      * Setup all interactive components
      */
-    async setupComponents() {
-        const componentSetups = [
+    async setupComponents() {        const componentSetups = [
             () => this.initializeNavigation(),
+            () => this.initializePrivacyHealthCheck(), // Add privacy health check
             () => this.initializeSecurityMeter(),
             () => this.initializePrivacyControls(),
             () => this.initializeEthicsScenarios(),
             () => this.initializeActionTracker(),
             () => this.initializeVulnerabilityScanner(),
+            () => this.initializeThreatCards(),
+            () => this.initializeResponsePlan(),
+            () => this.initializeCitizenshipPillars(),
             () => this.initializeScrollAnimations()
         ];
 
@@ -61,9 +64,7 @@ class DigitalEthicsSection {
         const navLinks = document.querySelectorAll('.nav-link');
         const navbar = document.querySelector('.navbar');
 
-        if (!hamburger || !navMenu || !navbar) return;
-
-        // Mobile menu toggle with ARIA support
+        if (!hamburger || !navMenu || !navbar) return;        // Mobile menu toggle with ARIA support
         hamburger.addEventListener('click', (e) => {
             e.preventDefault();
             const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
@@ -71,6 +72,9 @@ class DigitalEthicsSection {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', !isExpanded);
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = isExpanded ? 'auto' : 'hidden';
             
             // Focus management
             if (!isExpanded) {
@@ -84,6 +88,7 @@ class DigitalEthicsSection {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
                 hamburger.focus();
             }
         });
@@ -94,7 +99,21 @@ class DigitalEthicsSection {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
             });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') && 
+                !navMenu.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
+            }
         });
 
         // Enhanced navbar background on scroll with throttling
@@ -153,11 +172,9 @@ class DigitalEthicsSection {
                 scoreDisplay.style.color = currentScore >= 80 ? '#10b981' : 
                                           currentScore >= 60 ? '#f59e0b' : '#ef4444';
             }
-        };
-
-        // Animate security meter when it comes into view
+        };        // Animate security meter when it comes into view
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach entry => {
                 if (entry.isIntersecting && !this.isReducedMotion) {
                     this.animateSecurityScore(0, targetScore, updateSecurityMeter);
                     observer.unobserve(securityMeter);
@@ -734,6 +751,12 @@ const ethicsAnimations = `
         100% { transform: scale(1); }
     }
 
+    @keyframes privacyCheckPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        100% { transform: scale(1); }
+    }
+
     @keyframes securityScan {
         0% { transform: translateX(-100%); }
         100% { transform: translateX(100%); }
@@ -771,10 +794,77 @@ const ethicsAnimations = `
         animation: securityScan 2s ease-in-out infinite;
     }
 
+    /* Privacy Health Check Styles */
+    .checkup-item.completed {
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .checkup-item.completed .checkmark {
+        background: #10b981;
+        border-color: #10b981;
+    }
+
+    .checkup-item.completed .checkmark:after {
+        content: '✓';
+        color: white;
+        font-weight: bold;
+        font-size: 12px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Score Display Colors */
+    .score-display.score-excellent .score-number {
+        color: #10b981;
+        text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    .score-display.score-good .score-number {
+        color: #3b82f6;
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    }
+
+    .score-display.score-fair .score-number {
+        color: #f59e0b;
+        text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    }
+
+    .score-display.score-poor .score-number {
+        color: #f97316;
+        text-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+    }
+
+    .score-display.score-critical .score-number {
+        color: #ef4444;
+        text-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+        animation: glow 2s ease-in-out infinite;
+    }
+
+    .recommendations-list {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0 0 0;
+    }
+
+    .recommendation-item {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+    }
+
+    .recommendation-item:last-child {
+        border-bottom: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .animate-in,
         .privacy-control.enabled,
-        .scan-bar {
+        .scan-bar,
+        .score-display.score-critical .score-number {
             animation: none;
         }
     }
@@ -800,4 +890,287 @@ if (!document.querySelector('#section3-animations')) {
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = DigitalEthicsSection;
+}
+
+/**
+     * Enhanced privacy health check functionality
+     */
+    initializePrivacyHealthCheck() {
+        const checkupItems = document.querySelectorAll('.checkup-item');
+        const scoreDisplay = document.querySelector('.score-number');
+        const feedbackText = document.querySelector('.feedback-text');
+        const feedbackRecommendations = document.querySelector('.feedback-recommendations');
+
+        if (!checkupItems.length) return;
+
+        const updatePrivacyScore = () => {
+            const checkedItems = document.querySelectorAll('.checkup-item input[type="checkbox"]:checked');
+            const score = checkedItems.length;
+            const maxScore = checkupItems.length;
+            const percentage = Math.round((score / maxScore) * 100);
+
+            // Update score display
+            if (scoreDisplay) {
+                scoreDisplay.textContent = score;
+                scoreDisplay.style.color = this.getScoreColor(percentage);
+            }
+
+            // Update feedback
+            if (feedbackText) {
+                feedbackText.textContent = this.getPrivacyFeedback(percentage);
+            }
+
+            // Update recommendations
+            if (feedbackRecommendations) {
+                feedbackRecommendations.innerHTML = this.getPrivacyRecommendations(percentage);
+            }
+
+            // Save progress
+            this.savePrivacyCheckupProgress(checkedItems);
+        };
+
+        // Add event listeners to checkup items
+        checkupItems.forEach(item => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            if (!checkbox) return;
+
+            checkbox.addEventListener('change', (e) => {
+                item.classList.toggle('completed', e.target.checked);
+                
+                // Add completion animation
+                if (e.target.checked && !this.isReducedMotion) {
+                    item.style.animation = 'completionPulse 0.5s ease-out';
+                    setTimeout(() => {
+                        item.style.animation = '';
+                    }, 500);
+                }
+
+                updatePrivacyScore();
+            });
+
+            // Make entire item clickable
+            item.addEventListener('click', (e) => {
+                if (e.target !== checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+
+        // Load saved progress
+        this.loadPrivacyCheckupProgress();
+        updatePrivacyScore();
+
+        this.components.set('privacyHealthCheck', { checkupItems, updatePrivacyScore });
+    }
+
+    /**
+     * Get privacy feedback based on score percentage
+     */
+    getPrivacyFeedback(percentage) {
+        if (percentage >= 90) return '🔒 Excellent! Your privacy practices are very strong.';
+        if (percentage >= 75) return '✅ Good privacy practices! Keep it up.';
+        if (percentage >= 50) return '⚠️ Moderate privacy protection. Room for improvement.';
+        if (percentage >= 25) return '🔍 Your privacy needs attention. Start with basics.';
+        return '🚨 Critical: Your digital privacy is at risk!';
+    }
+
+    /**
+     * Get privacy recommendations based on score
+     */
+    getPrivacyRecommendations(percentage) {
+        const recommendations = [];
+        
+        if (percentage < 90) {
+            recommendations.push('Enable two-factor authentication on all important accounts');
+            recommendations.push('Review and update your privacy settings regularly');
+        }
+        
+        if (percentage < 75) {
+            recommendations.push('Use a password manager for unique, strong passwords');
+            recommendations.push('Be cautious about what you share on social media');
+        }
+        
+        if (percentage < 50) {
+            recommendations.push('Limit data sharing with third-party applications');
+            recommendations.push('Use private browsing modes when appropriate');
+        }
+        
+        if (percentage < 25) {
+            recommendations.push('Start with basic security: update passwords and software');
+            recommendations.push('Learn about common privacy threats and how to avoid them');
+        }
+
+        return `<h5>Recommendations:</h5><ul>${recommendations.map(rec => `<li>${rec}</li>`).join('')}</ul>`;
+    }
+
+    /**
+     * Get score color based on percentage
+     */
+    getScoreColor(percentage) {
+        if (percentage >= 75) return '#10b981'; // Green
+        if (percentage >= 50) return '#f59e0b'; // Yellow
+        return '#ef4444'; // Red
+    }
+
+    /**
+     * Save privacy checkup progress
+     */
+    savePrivacyCheckupProgress(checkedItems) {
+        const progress = Array.from(checkedItems).map(item => item.id || item.closest('.checkup-item').dataset.id);
+        localStorage.setItem('privacyCheckupProgress', JSON.stringify({
+            completed: progress,
+            timestamp: Date.now()
+        }));
+    }
+
+    /**
+     * Load saved privacy checkup progress
+     */
+    loadPrivacyCheckupProgress() {
+        try {
+            const saved = localStorage.getItem('privacyCheckupProgress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                progress.completed.forEach(id => {
+                    const checkbox = document.getElementById(id) || 
+                                   document.querySelector(`[data-id="${id}"] input[type="checkbox"]`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        checkbox.closest('.checkup-item').classList.add('completed');
+                    }
+                });
+            }    }
+
+    /**
+     * Enhanced threat card interactions
+     */
+    initializeThreatCards() {
+        const threatCards = document.querySelectorAll('.threat-card');
+        
+        threatCards.forEach(card => {
+            const protectionTips = card.querySelector('.protection-tips');
+            
+            // Make threat cards clickable to expand/collapse protection tips
+            card.addEventListener('click', (e) => {
+                // Don't toggle if clicking on links or buttons inside
+                if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+                
+                card.classList.toggle('expanded');
+                
+                if (protectionTips) {
+                    if (card.classList.contains('expanded')) {
+                        protectionTips.style.maxHeight = protectionTips.scrollHeight + 'px';
+                        protectionTips.style.opacity = '1';
+                        protectionTips.style.marginTop = '1rem';
+                    } else {
+                        protectionTips.style.maxHeight = '0';
+                        protectionTips.style.opacity = '0';
+                        protectionTips.style.marginTop = '0';
+                    }
+                }
+            });
+
+            // Add keyboard support
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+
+            // Make cards focusable
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-expanded', 'false');
+
+            // Update aria-expanded when toggled
+            const observer = new MutationObserver(() => {
+                card.setAttribute('aria-expanded', card.classList.contains('expanded'));
+            });
+            observer.observe(card, { attributes: true, attributeFilter: ['class'] });
+        });
+
+        this.components.set('threatCards', { threatCards });
+    }
+
+    /**
+     * Enhanced step-by-step response plan
+     */
+    initializeResponsePlan() {
+        const stepCards = document.querySelectorAll('.step-card');
+        
+        stepCards.forEach((card, index) => {
+            // Add entrance animation with delay
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 200);
+
+            // Add hover interactions
+            card.addEventListener('mouseenter', () => {
+                if (!this.isReducedMotion) {
+                    card.style.transform = 'translateY(-4px) scale(1.02)';
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (!this.isReducedMotion) {
+                    card.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+
+        // Initialize cards as hidden for animation
+        stepCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+        });
+
+        this.components.set('responsePlan', { stepCards });
+    }
+
+    /**
+     * Enhanced digital citizenship pillars
+     */
+    initializeCitizenshipPillars() {
+        const pillars = document.querySelectorAll('.pillar');
+        
+        pillars.forEach((pillar, index) => {
+            // Add entrance animation
+            setTimeout(() => {
+                pillar.style.opacity = '1';
+                pillar.style.transform = 'translateY(0)';
+            }, index * 150);
+
+            // Add click interaction to expand actions
+            const actions = pillar.querySelector('.pillar-actions');
+            if (actions) {
+                pillar.addEventListener('click', () => {
+                    pillar.classList.toggle('expanded');
+                    
+                    if (pillar.classList.contains('expanded')) {
+                        actions.style.maxHeight = actions.scrollHeight + 'px';
+                    } else {
+                        actions.style.maxHeight = '120px'; // Default visible height
+                    }
+                });
+
+                // Set initial max-height
+                actions.style.maxHeight = '120px';
+                actions.style.overflow = 'hidden';
+                actions.style.transition = 'max-height 0.3s ease';
+            }
+        });
+
+        // Initialize pillars as hidden for animation
+        pillars.forEach(pillar => {
+            pillar.style.opacity = '0';
+            pillar.style.transform = 'translateY(30px)';
+            pillar.style.transition = 'all 0.6s ease';
+        });
+
+        this.components.set('citizenshipPillars', { pillars });
+    }
 }

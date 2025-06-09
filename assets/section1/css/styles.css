@@ -255,56 +255,46 @@ body {
 .hamburger {
     display: none;
     flex-direction: column;
-    justify-content: space-around;
-    width: 28px;
-    height: 28px;
     cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-    z-index: var(--z-modal);
-    transition: all var(--duration-normal) ease;
-    
-    /* Touch target optimization */
-    min-width: 44px;
-    min-height: 44px;
-    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
 .hamburger:hover {
-    opacity: 0.8;
-}
-
-.hamburger:focus-visible {
-    outline: 2px solid var(--accent-blue);
-    outline-offset: 2px;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
 }
 
 .bar {
-    width: 100%;
+    width: 25px;
     height: 3px;
     background: var(--text-primary);
-    transition: all var(--duration-normal) ease;
+    transition: all 0.3s ease;
     border-radius: 3px;
     transform-origin: center;
 }
 
+/* Hamburger Menu Animation */
 .hamburger.active .bar:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    transform: rotate(45deg) translate(6px, 6px);
 }
 
 .hamburger.active .bar:nth-child(2) {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: scale(0);
 }
 
 .hamburger.active .bar:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* Mobile Menu Overlay */
-.nav-menu.mobile-active {
+.nav-menu.active {
     position: fixed;
     top: 0;
     left: 0;
@@ -429,57 +419,19 @@ body {
 .section-badge {
     display: inline-flex;
     align-items: center;
-    gap: var(--gap-xs);
-    padding: calc(var(--gap-xs) * 1.2) calc(var(--gap-sm) * 1.2);
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-    border: 2px solid rgba(59, 130, 246, 0.3);
-    border-radius: 50px;
-    color: var(--accent-blue);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: var(--gap-md);
-    margin-bottom: var(--gap-md);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 
-        0 8px 32px rgba(59, 130, 246, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all var(--duration-normal) ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.section-badge::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.section-badge:hover {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.25));
-    border-color: rgba(59, 130, 246, 0.5);
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 
-        0 12px 40px rgba(59, 130, 246, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.section-badge:hover::before {
-    left: 100%;
+    gap: 0.5rem;
+    background: rgba(79, 70, 229, 0.1);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
 }
 
 .badge-icon {
-    font-size: 1.3em;
-    animation: energyPulse 3s ease-in-out infinite;
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+    font-size: 1rem;
 }
 
 @keyframes energyPulse {
@@ -1682,8 +1634,7 @@ body {
     .nav-menu {
         display: none;
     }
-    
-    .nav-menu.mobile-active {
+      .nav-menu.active {
         display: flex;
     }
 }
@@ -1962,90 +1913,17 @@ body {
     border-radius: 4px;
 }
 
-/* Enhanced Section Badge Responsive Improvements */
+/* Section Badge Responsive Improvements */
 @media (max-width: 768px) {
     .section-badge {
-        font-size: clamp(0.75rem, 2.5vw, 0.875rem);
-        padding: calc(var(--gap-xs) * 0.8) calc(var(--gap-sm) * 0.9);
-        margin-bottom: calc(var(--gap-md) * 0.8);
-    }
-    
-    .badge-icon {
-        font-size: 1.1em;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
     .section-badge {
         font-size: 0.75rem;
-        padding: var(--gap-xs) var(--gap-sm);
-        letter-spacing: 0.5px;
-    }
-    
-    .hero-title {
-        margin-bottom: var(--gap-sm);
-    }
-    
-    .hero-subtitle {
-        margin-bottom: var(--gap-md);
-        font-size: var(--text-base);
-    }
-    
-    .hero-stats {
-        gap: var(--gap-sm);
-        margin-top: var(--gap-md);
-    }
-    
-    .stat {
-        padding: var(--gap-sm);
-    }
-    
-    .stat h3 {
-        font-size: var(--text-lg);
-    }
-}
-
-/* High-resolution display optimizations */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .section-badge {
-        border-width: 1px;
-    }
-    
-    .badge-icon {
-        text-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
-    }
-}
-
-/* Reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    .badge-icon {
-        animation: none;
-    }
-    
-    .hero-title {
-        animation: none;
-    }
-    
-    .section-badge::before {
-        transition: none;
-    }
-    
-    .stat::before {
-        transition: none;
-    }
-}
-
-/* Dark mode enhancements (for systems with dark mode preference) */
-@media (prefers-color-scheme: dark) {
-    .section-badge {
-        box-shadow: 
-            0 8px 32px rgba(59, 130, 246, 0.15),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    }
-    
-    .section-badge:hover {
-        box-shadow: 
-            0 12px 40px rgba(59, 130, 246, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        padding: 0.4rem 0.8rem;
     }
 }

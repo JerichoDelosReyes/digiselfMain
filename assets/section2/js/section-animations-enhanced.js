@@ -153,9 +153,7 @@ class SocialMediaSection {
         const navLinks = document.querySelectorAll('.nav-link');
         const navbar = document.querySelector('.navbar');
 
-        if (!hamburger || !navMenu || !navbar) return;
-
-        // Mobile menu toggle with ARIA support
+        if (!hamburger || !navMenu || !navbar) return;        // Mobile menu toggle with ARIA support
         hamburger.addEventListener('click', (e) => {
             e.preventDefault();
             const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
@@ -163,6 +161,9 @@ class SocialMediaSection {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', !isExpanded);
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = isExpanded ? 'auto' : 'hidden';
             
             // Focus management
             if (!isExpanded) {
@@ -176,6 +177,7 @@ class SocialMediaSection {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
                 hamburger.focus();
             }
         });
@@ -186,7 +188,21 @@ class SocialMediaSection {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
             });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navMenu.classList.contains('active') && 
+                !navMenu.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
+            }
         });
 
         // Enhanced navbar background on scroll with throttling

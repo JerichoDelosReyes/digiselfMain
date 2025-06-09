@@ -139,18 +139,24 @@ class NavigationController {
         this.setupSmoothScrolling();
         this.setupScrollEffects();
         this.setupKeyboardNavigation();
-    }
-
-    setupHamburgerMenu() {
+    }    setupHamburgerMenu() {
         if (!this.hamburger || !this.navMenu) return;
 
-        this.hamburger.addEventListener('click', () => {
+        this.hamburger.addEventListener('click', (e) => {
+            e.preventDefault();
             const isExpanded = this.hamburger.getAttribute('aria-expanded') === 'true';
-            this.hamburger.setAttribute('aria-expanded', !isExpanded);
-            this.navMenu.classList.toggle('active');
             
-            // Animate hamburger bars
             this.hamburger.classList.toggle('active');
+            this.navMenu.classList.toggle('active');
+            this.hamburger.setAttribute('aria-expanded', !isExpanded);
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = isExpanded ? 'auto' : 'hidden';
+            
+            // Focus management
+            if (!isExpanded) {
+                this.navMenu.querySelector('.nav-link')?.focus();
+            }
         });
 
         // Close menu when clicking on links
@@ -159,7 +165,21 @@ class NavigationController {
                 this.navMenu.classList.remove('active');
                 this.hamburger.setAttribute('aria-expanded', 'false');
                 this.hamburger.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.navMenu.classList.contains('active') && 
+                !this.navMenu.contains(e.target) && 
+                !this.hamburger.contains(e.target)) {
+                
+                this.hamburger.classList.remove('active');
+                this.navMenu.classList.remove('active');
+                this.hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
+            }
         });
     }
 

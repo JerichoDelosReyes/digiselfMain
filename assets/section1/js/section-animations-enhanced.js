@@ -239,41 +239,40 @@ class DigitalSelfSection1 {
             // Add click event listener for hamburger menu
             hamburger.addEventListener('click', (e) => {
                 e.preventDefault();
-                
-                // Toggle active state
-                const isActive = hamburger.classList.contains('active');                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('mobile-active');
+                  // Toggle active state
+                const isActive = hamburger.classList.contains('active');
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
                 hamburger.setAttribute('aria-expanded', !isActive);
                 
                 // Prevent body scroll when menu is open
                 document.body.style.overflow = isActive ? 'auto' : 'hidden';
             });
-                  // Close menu when clicking nav links
-        navLinks.forEach(link => {
+                  // Close menu when clicking nav links        navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
-                navMenu.classList.remove('mobile-active');
+                navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = 'auto';
             });
         });
-                  // Close menu when clicking outside
+          // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (navMenu.classList.contains('mobile-active') && 
+            if (navMenu.classList.contains('active') && 
                 !navMenu.contains(e.target) && 
                 !hamburger.contains(e.target)) {
                 
                 hamburger.classList.remove('active');
-                navMenu.classList.remove('mobile-active');
+                navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = 'auto';
             }
         });
-                  // Close menu with escape key
+          // Close menu with escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navMenu.classList.contains('mobile-active')) {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
-                navMenu.classList.remove('mobile-active');
+                navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = 'auto';
                 hamburger.focus();
