@@ -615,92 +615,244 @@ class MindfulnessController {
             this.activeExercise = exercises[type];
             this.showExerciseModal(this.activeExercise);
         }
-    }
-
-    createTransitionExercise() {
+    }    createTransitionExercise() {
         return {
             title: 'Mindful Device Transition',
+            description: 'Practice conscious intention-setting before using any digital device. This exercise helps create healthy boundaries and reduces mindless scrolling.',
+            duration: '3-5 minutes',
+            benefits: [
+                'Reduces mindless device usage',
+                'Increases digital awareness',
+                'Helps set healthy boundaries',
+                'Promotes intentional engagement'
+            ],
             steps: [
-                { text: 'Take three deep breaths', duration: 10000 },
-                { text: 'Notice how you\'re feeling right now', duration: 8000 },
-                { text: 'Set a clear intention for this device use', duration: 10000 },
-                { text: 'Check if this aligns with your well-being', duration: 8000 },
-                { text: 'Proceed mindfully or choose differently', duration: 5000 }
+                { 
+                    text: 'Pause before picking up or opening your device',
+                    guidance: 'Take a moment to simply breathe and center yourself',
+                    duration: 20000 
+                },
+                { 
+                    text: 'Take three conscious breaths',
+                    guidance: 'Focus on the sensation of breathing. Let each breath bring you into the present moment',
+                    duration: 30000 
+                },
+                { 
+                    text: 'Set a clear intention for your device use',
+                    guidance: 'Ask yourself: "What do I hope to accomplish?" Be specific about your purpose',
+                    duration: 25000 
+                },
+                { 
+                    text: 'Notice your emotional state and energy level',
+                    guidance: 'Check in with how you\'re feeling. Are you stressed, bored, or genuinely purposeful?',
+                    duration: 20000 
+                },
+                { 
+                    text: 'Proceed with awareness or choose a different activity',
+                    guidance: 'Based on your intention and current state, mindfully decide whether to continue or do something else',
+                    duration: 15000 
+                }
             ]
         };
-    }
-
-    createBodyScanExercise() {
+    }    createBodyScanExercise() {
         return {
             title: 'Digital Body Scan',
+            description: 'Check in with your physical well-being while using technology. This practice helps prevent digital strain and promotes body awareness.',
+            duration: '4-6 minutes',
+            benefits: [
+                'Prevents digital strain and tension',
+                'Increases body awareness',
+                'Promotes better posture',
+                'Reduces eye strain and fatigue'
+            ],
             steps: [
-                { text: 'Pause your current activity', duration: 5000 },
-                { text: 'Notice your posture and breathing', duration: 8000 },
-                { text: 'Scan for tension in your neck and shoulders', duration: 10000 },
-                { text: 'Check your eyes - are they strained?', duration: 8000 },
-                { text: 'Adjust your position or take a break if needed', duration: 7000 }
+                { 
+                    text: 'Pause your current digital activity',
+                    guidance: 'Gently stop what you\'re doing and turn your attention inward',
+                    duration: 15000 
+                },
+                { 
+                    text: 'Notice your posture and breathing',
+                    guidance: 'Are you slouching? Is your breathing shallow? Simply observe without judgment',
+                    duration: 25000 
+                },
+                { 
+                    text: 'Scan for tension in your neck, shoulders, and face',
+                    guidance: 'Feel for any tightness or strain. Notice if your jaw is clenched or shoulders raised',
+                    duration: 30000 
+                },
+                { 
+                    text: 'Check your eyes and vision',
+                    guidance: 'Are your eyes dry or strained? Try blinking slowly or looking at something distant',
+                    duration: 20000 
+                },
+                { 
+                    text: 'Make gentle adjustments or take a movement break',
+                    guidance: 'Stretch your neck, roll your shoulders, or step away from the screen if needed',
+                    duration: 25000 
+                }
             ]
         };
-    }
-
-    createConsumptionExercise() {
+    }    createConsumptionExercise() {
         return {
             title: 'Mindful Content Consumption',
+            description: 'Develop conscious awareness of how digital content affects your emotions and mental state. Practice intentional engagement with online media.',
+            duration: '5-8 minutes',
+            benefits: [
+                'Reduces emotional reactivity to content',
+                'Promotes mindful media consumption',
+                'Helps break scrolling habits',
+                'Improves digital content choices'
+            ],
             steps: [
-                { text: 'Set an intention before opening social media', duration: 8000 },
-                { text: 'Notice your emotional response to content', duration: 10000 },
-                { text: 'Ask: "Is this serving my well-being?"', duration: 8000 },
-                { text: 'Choose to engage mindfully or scroll past', duration: 8000 },
-                { text: 'End when you\'ve achieved your intention', duration: 6000 }
+                { 
+                    text: 'Set a clear intention before opening social media or news',
+                    guidance: 'Ask yourself: "What am I looking for?" and "How much time will I spend?"',
+                    duration: 20000 
+                },
+                { 
+                    text: 'Notice your emotional response to each piece of content',
+                    guidance: 'Pause briefly after reading or viewing. How does this make you feel?',
+                    duration: 35000 
+                },
+                { 
+                    text: 'Ask yourself: "Is this serving my well-being?"',
+                    guidance: 'Consider whether this content adds value or contributes to stress/comparison',
+                    duration: 25000 
+                },
+                { 
+                    text: 'Choose to engage mindfully or scroll past',
+                    guidance: 'Make conscious choices about what deserves your attention and energy',
+                    duration: 30000 
+                },
+                { 
+                    text: 'End when you\'ve achieved your original intention',
+                    guidance: 'Resist the urge to continue scrolling. Close the app with intention',
+                    duration: 20000 
+                }
             ]
         };
-    }
-
-    createDisconnectExercise() {
+    }    createDisconnectExercise() {
         return {
             title: 'Mindful Disconnection',
+            description: 'Practice ending digital sessions with awareness and grace. This helps create healthy transitions and reduces digital dependency.',
+            duration: '3-4 minutes',
+            benefits: [
+                'Creates conscious digital boundaries',
+                'Reduces FOMO and anxiety',
+                'Promotes healthy transitions',
+                'Builds digital self-control'
+            ],
             steps: [
-                { text: 'Notice any urge to continue using the device', duration: 8000 },
-                { text: 'Acknowledge resistance without judgment', duration: 8000 },
-                { text: 'Take three conscious breaths', duration: 10000 },
-                { text: 'Appreciate what you accomplished', duration: 7000 },
-                { text: 'Transition mindfully to your next activity', duration: 7000 }
+                { 
+                    text: 'Notice any urge to continue using the device',
+                    guidance: 'Acknowledge any resistance or FOMO without acting on it immediately',
+                    duration: 20000 
+                },
+                { 
+                    text: 'Acknowledge resistance without judgment',
+                    guidance: 'It\'s normal to want to keep scrolling. Notice this feeling with kindness',
+                    duration: 25000 
+                },
+                { 
+                    text: 'Take three deep, conscious breaths',
+                    guidance: 'Let each breath create space between you and the urge to continue',
+                    duration: 30000 
+                },
+                { 
+                    text: 'Appreciate what you accomplished during this session',
+                    guidance: 'Acknowledge any positive interactions, learning, or connection you experienced',
+                    duration: 20000 
+                },
+                { 
+                    text: 'Consciously transition to your next activity',
+                    guidance: 'Set a clear intention for what you\'ll do next, moving mindfully forward',
+                    duration: 15000 
+                }
             ]
         };
-    }
-
-    showExerciseModal(exercise) {
+    }    showExerciseModal(exercise) {
         // Create modal overlay
         const modal = document.createElement('div');
         modal.className = 'exercise-modal';
         modal.innerHTML = `
-            <div class="exercise-modal-content">
+            <div class="exercise-modal-content enhanced">
                 <div class="exercise-header">
-                    <h3>${exercise.title}</h3>
+                    <div class="exercise-icon">${this.getExerciseIcon(exercise.title)}</div>
+                    <h2>${exercise.title}</h2>
+                    <p class="exercise-description">${exercise.description}</p>
                     <button class="close-exercise" aria-label="Close exercise">×</button>
                 </div>
-                <div class="exercise-progress">
+                
+                <div class="exercise-intro">
+                    <div class="exercise-benefits">
+                        <h4>Benefits of this exercise:</h4>
+                        <ul>
+                            ${exercise.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="exercise-duration">
+                        <span class="duration-label">Estimated time:</span>
+                        <span class="duration-time">${exercise.duration}</span>
+                    </div>
+                </div>
+                
+                <div class="exercise-progress hidden">
+                    <div class="progress-header">
+                        <h4>Progress</h4>
+                        <div class="step-counter">Step <span class="current-step">1</span> of ${exercise.steps.length}</div>
+                    </div>
                     <div class="progress-bar">
                         <div class="progress-fill"></div>
                     </div>
-                    <div class="step-counter">Step <span class="current-step">1</span> of ${exercise.steps.length}</div>
                 </div>
+                
                 <div class="exercise-content">
-                    <div class="exercise-instruction"></div>
-                    <div class="exercise-timer">
+                    <div class="exercise-welcome">
+                        <h3>Ready to begin?</h3>
+                        <p>Find a comfortable position and prepare to engage mindfully with this exercise.</p>
+                        <div class="intention-input">
+                            <label for="exercise-intention">Set your intention (optional):</label>
+                            <input type="text" id="exercise-intention" placeholder="e.g., To feel more present and calm...">
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-instruction hidden"></div>
+                    
+                    <div class="exercise-timer hidden">
                         <div class="timer-circle">
-                            <span class="timer-text">00:00</span>
+                            <svg class="timer-ring" width="120" height="120">
+                                <circle class="timer-ring-bg" cx="60" cy="60" r="54" fill="transparent" stroke="#e2e8f0" stroke-width="8"/>
+                                <circle class="timer-ring-progress" cx="60" cy="60" r="54" fill="transparent" stroke="#10b981" stroke-width="8" stroke-linecap="round"/>
+                            </svg>
+                            <div class="timer-content">
+                                <span class="timer-text">00:00</span>
+                                <span class="timer-label">remaining</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
                 <div class="exercise-controls">
-                    <button class="pause-btn">Pause</button>
-                    <button class="skip-btn">Skip Step</button>
+                    <button class="start-exercise-btn primary-btn">
+                        <span class="btn-icon">▶</span>
+                        Start Exercise
+                    </button>
+                    <button class="pause-btn secondary-btn hidden">⏸ Pause</button>
+                    <button class="resume-btn secondary-btn hidden">▶ Resume</button>
+                    <button class="skip-btn tertiary-btn hidden">⏭ Skip Step</button>
+                    <button class="finish-btn success-btn hidden">✓ Complete</button>
+                </div>
+                
+                <div class="exercise-footer">
+                    <div class="mindfulness-tip">
+                        <strong>Mindfulness Tip:</strong> <span class="tip-text">Remember, there's no perfect way to do this exercise. Simply notice when your mind wanders and gently return your attention.</span>
+                    </div>
                 </div>
             </div>
         `;
 
-        // Add styles
+        // Add enhanced styles
         modal.style.cssText = `
             position: fixed;
             top: 0;
@@ -712,19 +864,74 @@ class MindfulnessController {
             align-items: center;
             justify-content: center;
             z-index: 10000;
+            backdrop-filter: blur(5px);
         `;
 
         document.body.appendChild(modal);
-        this.runExercise(modal, exercise);
+        this.setupModalInteractions(modal, exercise);
+    }
 
-        // Close button
+    getExerciseIcon(title) {
+        const iconMap = {
+            'Mindful Device Transition': '📱➡️🧘',
+            'Digital Body Scan': '🧘‍♀️',
+            'Mindful Content Consumption': '👁️',
+            'Mindful Disconnection': '🌱'
+        };
+        return iconMap[title] || '🧘';
+    }
+
+    setupModalInteractions(modal, exercise) {
+        // Close functionality
         modal.querySelector('.close-exercise').addEventListener('click', () => {
             this.stopExercise();
             document.body.removeChild(modal);
         });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.stopExercise();
+                document.body.removeChild(modal);
+            }
+        });
+
+        // Exercise controls
+        modal.querySelector('.start-exercise-btn').addEventListener('click', () => {
+            this.startExercise(modal, exercise);
+        });
+
+        modal.querySelector('.pause-btn').addEventListener('click', () => {
+            this.pauseExercise(modal);
+        });
+
+        modal.querySelector('.resume-btn').addEventListener('click', () => {
+            this.resumeExercise(modal);
+        });
+
+        modal.querySelector('.skip-btn').addEventListener('click', () => {
+            this.skipStep(modal, exercise);
+        });
+
+        modal.querySelector('.finish-btn').addEventListener('click', () => {
+            this.completeExercise(modal);
+        });
     }
 
-    runExercise(modal, exercise) {
+    startExercise(modal, exercise) {
+        // Hide welcome, show progress
+        modal.querySelector('.exercise-welcome').classList.add('hidden');
+        modal.querySelector('.exercise-progress').classList.remove('hidden');
+        modal.querySelector('.exercise-instruction').classList.remove('hidden');
+        modal.querySelector('.exercise-timer').classList.remove('hidden');
+        
+        // Update controls
+        modal.querySelector('.start-exercise-btn').classList.add('hidden');
+        modal.querySelector('.pause-btn').classList.remove('hidden');
+        modal.querySelector('.skip-btn').classList.remove('hidden');
+        modal.querySelector('.finish-btn').classList.remove('hidden');
+
+        this.runExercise(modal, exercise);
+    }    runExercise(modal, exercise) {
         let currentStep = 0;
         let isPaused = false;
         let timer;
@@ -733,7 +940,9 @@ class MindfulnessController {
         const stepCounter = modal.querySelector('.current-step');
         const instruction = modal.querySelector('.exercise-instruction');
         const timerText = modal.querySelector('.timer-text');
+        const timerRing = modal.querySelector('.timer-ring-progress');
         const pauseBtn = modal.querySelector('.pause-btn');
+        const resumeBtn = modal.querySelector('.resume-btn');
         const skipBtn = modal.querySelector('.skip-btn');
 
         const runStep = () => {
@@ -743,11 +952,25 @@ class MindfulnessController {
             }
 
             const step = exercise.steps[currentStep];
-            instruction.textContent = step.text;
+            
+            // Update instruction with guidance
+            instruction.innerHTML = `
+                <div class="step-content">
+                    <h4>Step ${currentStep + 1}</h4>
+                    <p>${step.text}</p>
+                    <div class="step-guidance">${step.guidance}</div>
+                </div>
+            `;
+            
             stepCounter.textContent = currentStep + 1;
 
             let timeLeft = step.duration;
             const startTime = Date.now();
+
+            // Setup timer ring
+            const circumference = 2 * Math.PI * 54;
+            timerRing.style.strokeDasharray = circumference;
+            timerRing.style.strokeDashoffset = circumference;
 
             const updateTimer = () => {
                 if (isPaused) return;
@@ -760,8 +983,14 @@ class MindfulnessController {
                 const displaySeconds = seconds % 60;
                 timerText.textContent = `${minutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
 
-                const progress = ((currentStep + 1 - timeLeft / step.duration) / exercise.steps.length) * 100;
-                progressFill.style.width = `${progress}%`;
+                // Update timer ring
+                const progress = (step.duration - timeLeft) / step.duration;
+                const offset = circumference - (progress * circumference);
+                timerRing.style.strokeDashoffset = offset;
+
+                // Update overall progress
+                const overallProgress = ((currentStep + progress) / exercise.steps.length) * 100;
+                progressFill.style.width = `${overallProgress}%`;
 
                 if (timeLeft > 0) {
                     timer = setTimeout(updateTimer, 100);
@@ -776,8 +1005,15 @@ class MindfulnessController {
 
         // Control buttons
         pauseBtn.addEventListener('click', () => {
-            isPaused = !isPaused;
-            pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+            isPaused = true;
+            pauseBtn.classList.add('hidden');
+            resumeBtn.classList.remove('hidden');
+        });
+
+        resumeBtn.addEventListener('click', () => {
+            isPaused = false;
+            resumeBtn.classList.add('hidden');
+            pauseBtn.classList.remove('hidden');
         });
 
         skipBtn.addEventListener('click', () => {
@@ -789,21 +1025,32 @@ class MindfulnessController {
         runStep();
     }
 
-    completeExercise(modal) {
+    pauseExercise(modal) {
+        // Already handled in runExercise
+    }
+
+    resumeExercise(modal) {
+        // Already handled in runExercise
+    }
+
+    skipStep(modal, exercise) {
+        // Already handled in runExercise
+    }    completeExercise(modal) {
         modal.querySelector('.exercise-content').innerHTML = `
             <div class="exercise-complete">
                 <div class="complete-icon">✨</div>
                 <h3>Exercise Complete!</h3>
                 <p>Take a moment to notice how you feel after this mindful practice.</p>
-                <button class="close-exercise final-close">Close</button>
+                <div class="completion-reflection">
+                    <label for="post-exercise-reflection">How do you feel? (optional)</label>
+                    <textarea id="post-exercise-reflection" placeholder="Reflect on your experience..." rows="3"></textarea>
+                </div>
             </div>
         `;
 
-        modal.querySelector('.final-close').addEventListener('click', () => {
-            this.stopExercise();
-            document.body.removeChild(modal);
-        });
-
+        modal.querySelector('.exercise-controls').style.display = 'none';
+        modal.querySelector('.exercise-progress').style.display = 'none';
+        
         // Auto-close after 10 seconds
         setTimeout(() => {
             if (document.body.contains(modal)) {
@@ -1233,11 +1480,38 @@ const additionalStyles = `
     border: 1px solid var(--border-light);
 }
 
-.exercise-header {
+.exercise-modal-content.enhanced {
+    background: var(--bg-white);
     color: var(--text-primary);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    max-width: 700px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-header {
+    text-align: center;
     border-bottom: 1px solid var(--border-light);
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.exercise-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.exercise-header h2 {
+    color: var(--text-primary);
+    margin: 0.5rem 0;
+    font-size: 2.2rem;
 }
 
 .exercise-header h3 {
@@ -1245,19 +1519,118 @@ const additionalStyles = `
     margin: 0;
 }
 
+.exercise-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
 .close-exercise {
-    background: transparent;
-    border: none;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-light);
     color: var(--text-secondary);
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.2s ease;
 }
 
 .close-exercise:hover {
+    background: var(--error);
+    color: white;
+    border-color: var(--error);
+    transform: scale(1.1);
+}
+
+.exercise-intro {
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.exercise-benefits h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.exercise-benefits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.exercise-benefits li {
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.exercise-benefits li::before {
+    content: '✓';
+    color: var(--primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.exercise-duration {
     background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid var(--border-light);
+}
+
+.duration-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.duration-time {
+    display: block;
+    color: var(--primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.exercise-welcome {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.intention-input {
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.intention-input label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.intention-input input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-light);
+    border-radius: 0.5rem;
+    background: var(--bg-white);
     color: var(--text-primary);
 }
 
@@ -1267,41 +1640,128 @@ const additionalStyles = `
 
 .exercise-instruction {
     color: var(--text-primary);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.step-content h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.step-content p {
+    font-size: 1.1rem;
     margin-bottom: 1rem;
 }
 
-.exercise-controls button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
+.step-guidance {
+    background: var(--bg-secondary);
+    padding: 1rem;
     border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin: 0 0.5rem;
-}
-
-.exercise-controls button:hover {
-    background: var(--primary-dark);
-}
-
-.step-counter {
+    border-left: 4px solid var(--primary);
+    margin-top: 1rem;
+    font-style: italic;
     color: var(--text-secondary);
+}
+
+.exercise-timer {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.timer-circle {
+    position: relative;
+}
+
+.timer-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .timer-text {
     color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: block;
 }
 
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9) translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+.timer-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.exercise-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.exercise-controls button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.primary-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+}
+
+.tertiary-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-medium);
+}
+
+.success-btn {
+    background: var(--success);
+    color: white;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.exercise-footer {
+    border-top: 1px solid var(--border-light);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
+.mindfulness-tip {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 .exercise-complete {
@@ -1313,6 +1773,61 @@ const additionalStyles = `
     font-size: 3rem;
     margin-bottom: 1rem;
     animation: bounce 0.6s ease;
+}
+
+.completion-reflection {
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.completion-reflection label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.completion-reflection textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-light);
+    border-radius: 0.5rem;
+    background: var(--bg-white);
+    color: var(--text-primary);
+    resize: vertical;
+}
+
+@media (max-width: 768px) {
+    .exercise-modal-content.enhanced {
+        max-width: 95%;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .exercise-intro {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .exercise-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .exercise-controls button {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 @keyframes bounce {
