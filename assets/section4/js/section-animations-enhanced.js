@@ -1223,12 +1223,74 @@ const additionalStyles = `
 }
 
 .exercise-modal-content {
-    background: white;
+    background: var(--bg-white);
+    color: var(--text-primary);
     border-radius: 1rem;
     padding: 2rem;
     max-width: 500px;
     width: 90%;
     animation: modalSlideIn 0.3s ease;
+    border: 1px solid var(--border-light);
+}
+
+.exercise-header {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.exercise-header h3 {
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.close-exercise {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-exercise:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.exercise-content {
+    color: var(--text-primary);
+}
+
+.exercise-instruction {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.exercise-controls button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 0.5rem;
+}
+
+.exercise-controls button:hover {
+    background: var(--primary-dark);
+}
+
+.step-counter {
+    color: var(--text-secondary);
+}
+
+.timer-text {
+    color: var(--text-primary);
 }
 
 @keyframes modalSlideIn {
