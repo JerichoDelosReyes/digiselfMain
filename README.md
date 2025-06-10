@@ -169,28 +169,6 @@ digiselfMain/
 
 ---
 
-## 🎓 Educational Impact
-
-### Learning Objectives
-- **Digital Literacy**: Understanding how technology affects identity and behavior
-- **Critical Thinking**: Analyzing social media psychology and digital influence
-- **Practical Skills**: Implementing healthy digital habits and boundaries
-- **Self-Awareness**: Reflecting on personal digital behaviors and patterns
-
-### Target Audience
-- **Students**: High school and university students navigating digital identity
-- **Young Professionals**: Early career individuals building online presence
-- **Educators**: Teachers and counselors supporting digital citizenship
-- **General Public**: Anyone interested in healthier technology relationships
-
-### Evidence-Based Content
-- **Research-Backed**: Content based on peer-reviewed studies and expert insights
-- **Practical Application**: Real-world strategies and actionable recommendations
-- **Current Statistics**: Up-to-date data on digital behavior and trends
-- **Psychological Insights**: Understanding the science behind digital interactions
-
----
-
 ## 👥 Team
 
 **BSCS2E - CvSU Imus**
