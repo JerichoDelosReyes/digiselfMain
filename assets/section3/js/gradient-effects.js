@@ -158,17 +158,14 @@ class GradientEffects {
             }
             
             // Apply section-specific styling with reduced intensity
-            const intensity = 0.02 + (sectionProgress * 0.05); // Reduced from 0.05 + 0.15
+            const intensity = 0; // Disabled gradient overlay
             const hue = 240 + (index * 30); // Reduced color variation
             const saturation = 30 + (sectionProgress * 10); // Reduced saturation changes
             
+            // Gradient overlay disabled for Section 3
             section.style.setProperty(
                 '--section-gradient-overlay', 
-                `radial-gradient(
-                    ellipse at ${this.mousePosition.x}% ${this.mousePosition.y}%, 
-                    hsla(${hue}, ${saturation}%, 60%, ${intensity}) 0%, 
-                    transparent 70%
-                )`
+                'transparent'
             );
         });
     }

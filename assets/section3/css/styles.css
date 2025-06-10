@@ -15,12 +15,9 @@
     --bg-card: rgba(26, 31, 46, 0.8);
     --text-primary: #ffffff;
     --text-secondary: #b4b8c5;
-    --text-muted: #6b7280;      /* Section 3 Specific Colors - Ethics Theme */
-    --ethics-color: #8b5cf6;        /* Purple - moral principles */
-    --responsibility-color: #10b981; /* Green - positive action */
-    --tips-color: #f59e0b;          /* Orange - actionable strategies */
-    --dilemmas-color: #ef4444;      /* Red - ethical challenges */
-      /* Accent Colors */
+    --text-muted: #6b7280;
+    
+    /* Accent Colors */
     --accent-primary: #4f46e5;
     --accent-secondary: #7c3aed;
     --accent-gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
@@ -294,7 +291,7 @@ body::after {
 .hero {
     padding: 8rem 0 4rem;
     margin-top: 0;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+    background: var(--bg-primary);
     position: relative;
     overflow: hidden;
     min-height: 90vh;
@@ -369,7 +366,7 @@ body::after {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--ethics-color), var(--responsibility-color));
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -845,10 +842,32 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--section-gradient-overlay, transparent);
+    background: transparent;
     z-index: -1;
     pointer-events: none;
     transition: background 0.5s ease;
+}
+
+/* Ethics Section - Solid Background */
+.ethics-section {
+    background: var(--bg-primary);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ethics-section::before {
+    background: transparent;
+}
+
+/* Responsibility Section - Different Background */
+.responsibility-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.responsibility-section::before {
+    background: transparent;
 }
 
 .topic-header {
@@ -908,6 +927,23 @@ body::after {
 }
 
 /* Ethics Framework */
+.ethics-framework {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ethics-framework h3 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
 .principles-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -920,19 +956,72 @@ body::after {
 }
 
 .principle-card {
-    background: var(--bg-card);
+    background: rgba(26, 31, 46, 0.9);
     border-radius: 16px;
     padding: 2rem;
     border: 1px solid var(--border-subtle);
     backdrop-filter: blur(20px);
     transition: all 0.3s ease;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.principle-card:hover {
+.principle-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(139, 92, 246, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.principle-card:nth-child(1) {
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.principle-card:nth-child(1):hover {
     transform: translateY(-4px);
     border-color: var(--ethics-color);
-    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+}
+
+.principle-card:nth-child(2) {
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.principle-card:nth-child(2):hover {
+    transform: translateY(-4px);
+    border-color: var(--responsibility-color);
+    box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3);
+}
+
+.principle-card:nth-child(3) {
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.principle-card:nth-child(3):hover {
+    transform: translateY(-4px);
+    border-color: var(--dilemmas-color);
+    box-shadow: 0 15px 40px rgba(239, 68, 68, 0.3);
+}
+
+.principle-card:nth-child(4) {
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+.principle-card:nth-child(4):hover {
+    transform: translateY(-4px);
+    border-color: var(--tips-color);
+    box-shadow: 0 15px 40px rgba(245, 158, 11, 0.3);
+}
+
+.principle-card:hover::before {
+    opacity: 1;
 }
 
 .principle-icon {
@@ -991,13 +1080,42 @@ body::after {
 }
 
 /* Ethical Dilemmas */
-.dilemma-scenario {
+.ethical-dilemmas {
     background: var(--bg-card);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+    border: 1px solid var(--border-subtle);
+}
+
+.ethical-dilemmas h3 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.dilemmas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dilemma-scenario {
+    background: rgba(26, 31, 46, 0.9);
     border-radius: 16px;
     margin: 2rem 0;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid rgba(239, 68, 68, 0.3);
     backdrop-filter: blur(20px);
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.dilemma-scenario:hover {
+    transform: translateY(-2px);
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
 }
 
 .scenario-header {
@@ -1005,8 +1123,8 @@ body::after {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    background: rgba(139, 92, 246, 0.1);
-    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(239, 68, 68, 0.15);
+    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .scenario-header h4 {
@@ -1226,6 +1344,23 @@ body::after {
 /* Threat card enhancements - removed as no longer needed */
 
 /* Enhanced Digital Responsibility Pillars */
+.citizenship-framework {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 2rem 0;
+    border: 1px solid var(--border-subtle);
+}
+
+.citizenship-framework h3 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
 .pillars-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1237,14 +1372,58 @@ body::after {
 }
 
 .pillar {
-    background: rgba(26, 31, 46, 0.8);
-    border: 2px solid rgba(79, 70, 229, 0.3);
+    background: rgba(26, 31, 46, 0.9);
+    border: 2px solid rgba(16, 185, 129, 0.3);
     border-radius: 20px;
     padding: 2.5rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(20px);
+}
+
+.pillar.digital-respect {
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.pillar.digital-respect:hover {
+    border-color: rgba(139, 92, 246, 0.6);
+    box-shadow: 
+        0 20px 40px rgba(139, 92, 246, 0.2),
+        0 0 0 1px rgba(139, 92, 246, 0.1);
+}
+
+.pillar.information-literacy {
+    border-color: rgba(6, 182, 212, 0.4);
+}
+
+.pillar.information-literacy:hover {
+    border-color: rgba(6, 182, 212, 0.6);
+    box-shadow: 
+        0 20px 40px rgba(6, 182, 212, 0.2),
+        0 0 0 1px rgba(6, 182, 212, 0.1);
+}
+
+.pillar.digital-participation {
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+.pillar.digital-participation:hover {
+    border-color: rgba(245, 158, 11, 0.6);
+    box-shadow: 
+        0 20px 40px rgba(245, 158, 11, 0.2),
+        0 0 0 1px rgba(245, 158, 11, 0.1);
+}
+
+.pillar.digital-protection {
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.pillar.digital-protection:hover {
+    border-color: rgba(16, 185, 129, 0.6);
+    box-shadow: 
+        0 20px 40px rgba(16, 185, 129, 0.2),
+        0 0 0 1px rgba(16, 185, 129, 0.1);
 }
 
 .pillar::before {
@@ -1286,16 +1465,54 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(79, 70, 229, 0.1);
+    background: rgba(16, 185, 129, 0.1);
     border-radius: 12px;
-    border: 1px solid rgba(79, 70, 229, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     flex-shrink: 0;
     transition: all 0.3s ease;
 }
 
-.pillar:hover .pillar-icon {
-    background: rgba(79, 70, 229, 0.2);
-    border-color: rgba(79, 70, 229, 0.5);
+.digital-respect .pillar-icon {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.digital-respect:hover .pillar-icon {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.5);
+    transform: scale(1.1);
+}
+
+.information-literacy .pillar-icon {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+.information-literacy:hover .pillar-icon {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: rgba(6, 182, 212, 0.5);
+    transform: scale(1.1);
+}
+
+.digital-participation .pillar-icon {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+.digital-participation:hover .pillar-icon {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: rgba(245, 158, 11, 0.5);
+    transform: scale(1.1);
+}
+
+.digital-protection .pillar-icon {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.digital-protection:hover .pillar-icon {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.5);
     transform: scale(1.1);
 }
 
@@ -1451,6 +1668,24 @@ body::after {
     text-align: center;
     margin-bottom: 3rem;
     color: var(--text-primary);
+}
+
+/* Essential Tips & Strategies */
+.tips-strategies {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+    border: 1px solid var(--border-subtle);
+}
+
+.tips-strategies h3 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
 }
 
 .tips-grid {
@@ -1860,9 +2095,7 @@ body::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    background: var(--bg-secondary);
     z-index: 1;
 }
 
