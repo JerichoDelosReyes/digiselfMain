@@ -2153,6 +2153,7 @@ body {
 
 .strategies-header {
     text-align: center;
+    margin-top: 2rem;
     margin-bottom: 4rem;
 }
 
@@ -2471,11 +2472,6 @@ body {
     left: 0;
     color: var(--accent-primary);
     font-weight: bold;
-    font-size: 1.3rem;
-}
-
-.challenge-points li:last-child {
-    margin-bottom: 0;
 }
 
 /* Self Understanding Section Styles */
@@ -2634,7 +2630,6 @@ body {
     width: 100%;
     height: 1px;
     background: linear-gradient(90deg, transparent 0%, var(--border-subtle) 20%, var(--accent-primary) 50%, var(--border-subtle) 80%, transparent 100%);
-    margin: 4rem 0;
     position: relative;
 }
 
@@ -2947,3 +2942,371 @@ body {
         z-index: 10000;
     }
 }
+
+/* Enhanced Card Backgrounds for List Content Sections */
+
+/* Boundary Examples Cards */
+.boundary-examples {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.boundary-examples:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.boundary-examples .example {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    border-left: 3px solid var(--accent-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.boundary-examples .example:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: var(--accent-secondary);
+    transform: translateX(5px);
+}
+
+/* Technique List Cards */
+.technique-list {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.technique-list:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.technique-list .technique {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.2s ease;
+}
+
+.technique-list .technique:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Principles List Cards */
+.principles-list {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.principles-list:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.principles-list .principle {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.2s ease;
+}
+
+.principles-list .principle:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Framework Steps Cards */
+.framework-steps {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.framework-steps:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.framework-steps .framework-step {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.2s ease;
+}
+
+.framework-steps .framework-step:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Challenges List Cards */
+.authenticity-challenges .challenges-list,
+.strategy-card .challenges-list {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    display: block; /* Override grid for these specific instances */
+    grid-template-columns: none;
+}
+
+.authenticity-challenges .challenges-list:hover,
+.strategy-card .challenges-list:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.authenticity-challenges .challenges-list .challenge,
+.strategy-card .challenges-list .challenge {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    border-left: 3px solid var(--accent-primary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.authenticity-challenges .challenges-list .challenge:hover,
+.strategy-card .challenges-list .challenge:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: var(--accent-secondary);
+    transform: translateX(5px);
+}
+
+/* Benefits List Enhanced Cards */
+.strategy-benefits .benefits-list {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.strategy-benefits .benefits-list:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.strategy-benefits .benefits-list .benefit {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.2s ease;
+}
+
+.strategy-benefits .benefits-list .benefit:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Metrics List Cards */
+.metrics-list {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.metrics-list:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.metrics-list .metric {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-left: 3px solid var(--strategy-color);
+    transition: all 0.2s ease;
+}
+
+.metrics-list .metric:hover {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: translateX(5px);
+}
+
+/* Enhanced Visual Effects for List Cards */
+
+/* Add subtle glow effects on hover */
+.boundary-examples:hover,
+.technique-list:hover,
+.principles-list:hover,
+.framework-steps:hover,
+.authenticity-challenges .challenges-list:hover,
+.strategy-card .challenges-list:hover,
+.strategy-benefits .benefits-list:hover,
+.metrics-list:hover {
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(79, 70, 229, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Color-coded borders for different content types */
+.boundary-examples {
+    border-left: 4px solid rgba(239, 68, 68, 0.6); /* Red for boundaries */
+}
+
+.technique-list {
+    border-left: 4px solid rgba(16, 185, 129, 0.6); /* Green for techniques */
+}
+
+.principles-list {
+    border-left: 4px solid rgba(139, 92, 246, 0.6); /* Purple for principles */
+}
+
+.framework-steps {
+    border-left: 4px solid rgba(245, 158, 11, 0.6); /* Orange for frameworks */
+}
+
+.authenticity-challenges .challenges-list,
+.strategy-card .challenges-list {
+    border-left: 4px solid rgba(59, 130, 246, 0.6); /* Blue for challenges */
+}
+
+.strategy-benefits .benefits-list {
+    border-left: 4px solid rgba(16, 185, 129, 0.6); /* Green for benefits */
+}
+
+.metrics-list {
+    border-left: 4px solid rgba(16, 185, 129, 0.8); /* Stronger green for metrics */
+}
+
+/* Improved content hierarchy within cards */
+.boundary-examples .example:first-child,
+.technique-list .technique:first-child,
+.principles-list .principle:first-child,
+.framework-steps .framework-step:first-child,
+.authenticity-challenges .challenges-list .challenge:first-child,
+.strategy-card .challenges-list .challenge:first-child,
+.strategy-benefits .benefits-list .benefit:first-child {
+    margin-top: 0;
+}
+
+.boundary-examples .example:last-child,
+.technique-list .technique:last-child,
+.principles-list .principle:last-child,
+.framework-steps .framework-step:last-child,
+.authenticity-challenges .challenges-list .challenge:last-child,
+.strategy-card .challenges-list .challenge:last-child,
+.strategy-benefits .benefits-list .benefit:last-child {
+    margin-bottom: 0;
+}
+
+/* Enhanced typography for better readability */
+.boundary-examples h5,
+.technique-list h5,
+.principles-list h5,
+.framework-steps h5,
+.authenticity-challenges h5,
+.strategy-benefits h5,
+.metrics-list h5 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Subtle animation for better user feedback */
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.boundary-examples,
+.technique-list,
+.principles-list,
+.framework-steps,
+.authenticity-challenges .challenges-list,
+.strategy-card .challenges-list,
+.strategy-benefits .benefits-list,
+.metrics-list {
+    animation: cardEnter 0.3s ease-out;
+}
+
+/* Focus states for accessibility */
+.boundary-examples:focus-within,
+.technique-list:focus-within,
+.principles-list:focus-within,
+.framework-steps:focus-within,
+.authenticity-challenges .challenges-list:focus-within,
+.strategy-card .challenges-list:focus-within,
+.strategy-benefits .benefits-list:focus-within,
+.metrics-list:focus-within {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Existing styles continue below */
