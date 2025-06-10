@@ -863,3 +863,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Export for potential external use
 window.DigitalEthicsAnimations = DigitalEthicsAnimations;
+
+
+
