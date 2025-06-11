@@ -12,6 +12,7 @@ class DigitalSelfSection1 {
         this.isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         this.isHighDPI = window.devicePixelRatio > 1;
+        this.initStart = performance.now();
         
         // Responsive breakpoints
         this.breakpoints = {
@@ -29,6 +30,11 @@ class DigitalSelfSection1 {
         };
         
         this.init();
+        
+        // Enable debug mode in development
+        if (window.location.hostname === 'localhost') {
+            setTimeout(() => this.enableDebugMode(), 1000);
+        }
     }
 
     /**
@@ -40,19 +46,129 @@ class DigitalSelfSection1 {
         if (width < this.breakpoints.tablet) return 'tablet';
         return 'desktop';
     }    /**
-     * Initialize all components with responsive features
+     * Initialize all components with enhanced error handling
      */
     async init() {
         try {
+            console.log('🚀 Section 1 initialization started');
+            
+            // Check for required elements
+            this.performPreInitChecks();
+            
             this.setupNavigation();
             await this.setupComponents();
             this.setupEventListeners();
             this.setupIntersectionObservers();
             this.setupResponsiveFeatures();
             this.initializeAccessibility();
-            console.log('Section 1 initialized successfully with responsive features');
+            
+            // Performance metrics
+            const initTime = performance.now() - this.initStart;
+            console.log(`✅ Section 1 initialized successfully in ${initTime.toFixed(2)}ms`);
+            
+            // Post-init validation
+            this.validateInitialization();
+            
         } catch (error) {
-            console.error('Error initializing Section 1:', error);
+            console.error('❌ Error initializing Section 1:', error);
+            this.handleInitializationError(error);
+        }
+    }
+
+    /**
+     * Pre-initialization checks
+     */
+    performPreInitChecks() {
+        const requiredElements = [
+            '.navbar',
+            '.hero',
+            '.identity-model',
+            '.hamburger'
+        ];
+        
+        const missingElements = requiredElements.filter(selector => 
+            !document.querySelector(selector)
+        );
+        
+        if (missingElements.length > 0) {
+            console.warn('⚠️ Missing required elements:', missingElements);
+        }
+    }
+
+    /**
+     * Validate initialization
+     */
+    validateInitialization() {
+        const checks = [
+            () => this.components.size > 0,
+            () => this.observers.size > 0,
+            () => document.querySelector('.identity-model') !== null
+        ];
+        
+        const failedChecks = checks.filter(check => !check());
+        
+        if (failedChecks.length > 0) {
+            console.warn(`⚠️ ${failedChecks.length} initialization checks failed`);
+        }
+    }
+
+    /**
+     * Handle initialization errors gracefully
+     */
+    handleInitializationError(error) {
+        // Basic fallback initialization
+        this.setupBasicNavigation();
+        
+        // Show user-friendly error (in development only)
+        if (window.location.hostname === 'localhost') {
+            this.showDevelopmentError(error);
+        }
+    }
+
+    /**
+     * Show development error overlay
+     */
+    showDevelopmentError(error) {
+        const errorOverlay = document.createElement('div');
+        errorOverlay.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            z-index: 10000;
+            max-width: 300px;
+            font-family: monospace;
+            font-size: 12px;
+        `;
+        errorOverlay.innerHTML = `
+            <h4>Development Error</h4>
+            <p>${error.message}</p>
+            <button onclick="this.parentElement.remove()">Dismiss</button>
+        `;
+        document.body.appendChild(errorOverlay);
+        
+        setTimeout(() => {
+            if (errorOverlay.parentElement) {
+                errorOverlay.remove();
+            }
+        }, 10000);
+    }
+
+    /**
+     * Basic navigation fallback
+     */
+    setupBasicNavigation() {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
         }
     }
 
@@ -1609,6 +1725,193 @@ class DigitalSelfSection1 {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
+    }
+
+    /**
+     * Performance monitoring utilities
+     */
+    measurePerformance(name, fn) {
+        const start = performance.now();
+        const result = fn();
+        const end = performance.now();
+        console.log(`⏱️ ${name}: ${(end - start).toFixed(2)}ms`);
+        return result;
+    }
+
+    /**
+     * Intersection Observer with performance optimization
+     */
+    createOptimizedObserver(callback, options = {}) {
+        return new IntersectionObserver((entries) => {
+            // Batch DOM updates
+            requestAnimationFrame(() => {
+                entries.forEach(callback);
+            });
+        }, {
+            rootMargin: '50px',
+            threshold: 0.1,
+            ...options
+        });
+    }
+
+    /**
+     * Enhanced component loading with retry mechanism
+     */
+    async loadComponentWithRetry(componentName, loadFn, maxRetries = 3) {
+        for (let attempt = 0; attempt < maxRetries; attempt++) {
+            try {
+                const startTime = performance.now();
+                await loadFn();
+                this.trackPerformance(componentName, startTime);
+                console.log(`✅ ${componentName} loaded successfully`);
+                return;
+            } catch (error) {
+                console.warn(`⚠️ ${componentName} load attempt ${attempt + 1} failed:`, error);
+                
+                if (attempt === maxRetries - 1) {
+                    this.handleComponentError(componentName, error);
+                } else {
+                    // Exponential backoff
+                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 100));
+                }
+            }
+        }
+    }
+
+    /**
+     * Component error handling
+     */
+    handleComponentError(componentName, error) {
+        console.error(`❌ Failed to load ${componentName} after retries:`, error);
+        
+        // Create fallback UI
+        this.createFallbackUI(componentName);
+        
+        // Track error for analytics (if available)
+        if (window.gtag) {
+            window.gtag('event', 'component_error', {
+                component: componentName,
+                error: error.message
+            });
+        }
+    }
+
+    /**
+     * Create fallback UI for failed components
+     */
+    createFallbackUI(componentName) {
+        const container = document.querySelector(`[data-component="${componentName}"]`);
+        if (!container) return;
+        
+        container.innerHTML = `
+            <div class="error-state">
+                <h3>⚠️ Component Unavailable</h3>
+                <p>The ${componentName} component couldn't load properly.</p>
+                <button class="retry-button" onclick="window.location.reload()">
+                    Retry Page
+                </button>
+            </div>
+        `;
+    }
+
+    /**
+     * Performance tracking
+     */
+    trackPerformance(componentName, startTime) {
+        const endTime = performance.now();
+        const loadTime = endTime - startTime;
+        
+        if (!this.performanceMetrics) {
+            this.performanceMetrics = {};
+        }
+        
+        this.performanceMetrics[componentName] = loadTime;
+        
+        // Log slow components
+        if (loadTime > 100) {
+            console.warn(`🐌 Slow component: ${componentName} took ${loadTime.toFixed(2)}ms`);
+        }
+    }
+
+    /**
+     * Get performance report
+     */
+    getPerformanceReport() {
+        if (!this.performanceMetrics) return null;
+        
+        const totalTime = Object.values(this.performanceMetrics).reduce((a, b) => a + b, 0);
+        const report = {
+            totalLoadTime: totalTime,
+            componentTimes: this.performanceMetrics,
+            slowestComponent: Object.entries(this.performanceMetrics)
+                .sort(([,a], [,b]) => b - a)[0]
+        };
+        
+        console.table(this.performanceMetrics);
+        return report;
+    }
+
+    /**
+     * Development debug utilities
+     */
+    enableDebugMode() {
+        if (window.location.hostname !== 'localhost') return;
+        
+        // Add debug panel
+        this.createDebugPanel();
+        
+        // Global debug object
+        window.section1Debug = {
+            components: this.components,
+            observers: this.observers,
+            performance: () => this.getPerformanceReport(),
+            viewport: this.viewport,
+            breakpoints: this.breakpoints,
+            forceError: (componentName) => this.handleComponentError(componentName, new Error('Forced error')),
+            reload: () => window.location.reload()
+        };
+        
+        console.log('🔧 Debug mode enabled. Use window.section1Debug to access debug tools.');
+    }
+
+    /**
+     * Create debug panel
+     */
+    createDebugPanel() {
+        const panel = document.createElement('div');
+        panel.id = 'section1-debug-panel';
+        panel.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 10000;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        `;
+        
+        panel.innerHTML = `
+            <h4>Section 1 Debug</h4>
+            <div>Device: ${this.viewport.device}</div>
+            <div>Orientation: ${this.viewport.orientation}</div>
+            <div>Reduced Motion: ${this.isReducedMotion}</div>
+            <div>Touch Device: ${this.isTouchDevice}</div>
+            <div>Components: ${this.components.size}</div>
+            <div>Observers: ${this.observers.size}</div>
+            <button onclick="window.section1Debug.performance()" style="margin-top: 0.5rem; padding: 0.25rem 0.5rem;">
+                Show Performance
+            </button>
+            <button onclick="this.parentElement.remove()" style="margin-top: 0.5rem; margin-left: 0.5rem; padding: 0.25rem 0.5rem;">
+                Close
+            </button>
+        `;
+        
+        document.body.appendChild(panel);
     }
 
     /**
