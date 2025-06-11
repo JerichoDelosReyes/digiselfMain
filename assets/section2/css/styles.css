@@ -2746,6 +2746,7 @@ body {
 .nav-card {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1.5rem;
     padding: 2rem;
     background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
@@ -2759,6 +2760,7 @@ body {
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    min-height: 120px;
 }
 
 .nav-card::before {
@@ -2784,12 +2786,13 @@ body {
 }
 
 .nav-card.back {
-    justify-content: flex-start;
+    justify-content: center;
+    flex-direction: row;
 }
 
 .nav-card.next {
-    justify-content: flex-end;
-    text-align: right;
+    justify-content: center;
+    flex-direction: row-reverse;
 }
 
 .nav-icon {
@@ -2808,6 +2811,13 @@ body {
 .nav-card:hover .nav-icon {
     transform: scale(1.2);
     text-shadow: 0 0 30px rgba(100, 149, 237, 0.5);
+}
+
+.nav-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .nav-content h3 {
