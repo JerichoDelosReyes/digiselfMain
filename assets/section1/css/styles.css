@@ -403,27 +403,6 @@ body {
     }
 }
 
-/* Skip Link for Accessibility */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--accent-blue);
-    color: var(--text-primary);
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    z-index: 10000;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.skip-link:focus {
-    top: 6px;
-    outline: 2px solid var(--accent-purple);
-    outline-offset: 2px;
-}
-
 /* Enhanced Accessibility Features */
 
 /* Screen reader only class */
@@ -437,25 +416,6 @@ body {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-}
-
-/* Skip to content link */
-.skip-to-content {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--accent-blue);
-    color: var(--text-primary);
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    z-index: 10000;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.skip-to-content:focus {
-    top: 6px;
 }
 
 /* Focus indicators */
