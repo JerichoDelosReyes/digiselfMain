@@ -82,19 +82,63 @@
                         <p>Theory Foundation</p>
                     </div>
                 </div>
-            </div>            <div class="hero-visual" aria-label="Interactive identity model visualization">
-                <div class="identity-model">
-                    <div class="identity-circle real-self" tabindex="0" role="button" aria-label="Real Self - Your authentic identity and core values">
-                        <span>Real Self</span>
-                    </div>
-                    <div class="identity-circle ideal-self" tabindex="0" role="button" aria-label="Ideal Self - Who you aspire to become">
-                        <span>Ideal Self</span>
-                    </div>
-                    <div class="identity-circle online-self" tabindex="0" role="button" aria-label="Online Self - Your digital persona and presence">
-                        <span>Online Self</span>
-                    </div>
-                    <div class="identity-center" aria-label="Digital Identity - The integration of all identity dimensions">
-                        <span>Digital Identity</span>
+            </div>            <div class="hero-visual" aria-label="Digital identity visualization">
+                <div class="hero-image-container">
+                    <img src="img/section1Pic.png" alt="Digital Self Concept Illustration" class="hero-main-image">
+                    
+                    <!-- Digital Elements Overlay -->
+                    <div class="digital-elements">
+                        <!-- Floating Digital Icons -->
+                        <div class="digital-icon icon-1" aria-hidden="true">
+                            <span>💻</span>
+                        </div>
+                        <div class="digital-icon icon-2" aria-hidden="true">
+                            <span>📱</span>
+                        </div>
+                        <div class="digital-icon icon-3" aria-hidden="true">
+                            <span>🌐</span>
+                        </div>
+                        <div class="digital-icon icon-4" aria-hidden="true">
+                            <span>🔗</span>
+                        </div>
+                        <div class="digital-icon icon-5" aria-hidden="true">
+                            <span>⚡</span>
+                        </div>
+                        
+                        <!-- Animated Connection Lines -->
+                        <svg class="connection-svg" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0.4" />
+                                </linearGradient>
+                            </defs>
+                            <path class="connection-line line-1" stroke="url(#lineGradient)" stroke-width="2" fill="none" 
+                                  d="M50,50 Q150,80 250,120" />
+                            <path class="connection-line line-2" stroke="url(#lineGradient)" stroke-width="2" fill="none" 
+                                  d="M100,150 Q200,100 300,80" />
+                            <path class="connection-line line-3" stroke="url(#lineGradient)" stroke-width="2" fill="none" 
+                                  d="M80,200 Q180,180 280,160" />
+                        </svg>
+                        
+                        <!-- Pulsing Digital Aura -->
+                        <div class="digital-aura aura-1"></div>
+                        <div class="digital-aura aura-2"></div>
+                        <div class="digital-aura aura-3"></div>
+                        
+                        <!-- Identity Labels -->
+                        <div class="identity-label real-label" tabindex="0" role="button" aria-label="Real Self - Your authentic identity">
+                            <span class="label-text">Real Self</span>
+                            <span class="label-dot"></span>
+                        </div>
+                        <div class="identity-label ideal-label" tabindex="0" role="button" aria-label="Ideal Self - Who you aspire to become">
+                            <span class="label-text">Ideal Self</span>
+                            <span class="label-dot"></span>
+                        </div>
+                        <div class="identity-label online-label" tabindex="0" role="button" aria-label="Online Self - Your digital persona">
+                            <span class="label-text">Online Self</span>
+                            <span class="label-dot"></span>
+                        </div>
                     </div>
                 </div>
             </div>
