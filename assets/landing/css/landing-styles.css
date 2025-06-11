@@ -825,8 +825,11 @@ body {
 
 .sections-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .section-card {
@@ -990,6 +993,15 @@ body {
 
 .footer-link:hover {
     color: var(--accent-blue);
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .sections-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1656,11 +1668,12 @@ body {
         width: 7px;
         height: 7px;
     }
-    
-    /* Sections Grid */
+      /* Sections Grid */
     .sections-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
         gap: 1.5rem;
+        max-width: 100%;
     }
     
     /* Quote Section */
