@@ -92,7 +92,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 2rem;
 }
 
 /* Typography */
@@ -1519,40 +1519,7 @@ h5 { font-size: 1.25rem; }
     color: var(--text-muted);
 }
 
-/* Dark mode section navigation */
-[data-theme="dark"] {
-    .section-navigation {
-        background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 100%);
-        border-top-color: var(--border-medium);
-    }
-
-    .nav-card {
-        background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(55, 65, 81, 0.8) 100%);
-        border-color: var(--border-medium);
-        color: var(--text-primary);
-    }
-
-    .nav-card:hover {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(13, 148, 136, 0.2) 100%);
-        border-color: var(--primary);
-    }
-
-    .nav-content h3 {
-        color: var(--text-primary);
-    }
-
-    .nav-content p {
-        color: var(--text-secondary);
-    }
-
-    .nav-card:hover .nav-content h3 {
-        color: var(--text-primary);
-    }
-
-    .nav-card:hover .nav-content p {
-        color: var(--text-primary);
-    }
-}
+/* Dark mode section navigation styles removed - using main section-navigation styles instead */
 
 [data-theme="dark"] .section-badge {
     background: rgba(16, 185, 129, 0.1);
@@ -1681,10 +1648,10 @@ h5 { font-size: 1.25rem; }
     color: var(--text-secondary);
 }
 
-/* Section Navigation Styles - Modern Dark Theme */
+/* Section Navigation - Enhanced Responsive */
 .section-navigation {
     padding: 3rem 0;
-    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1f2e 50%, #16213e 100%);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
@@ -1713,7 +1680,7 @@ h5 { font-size: 1.25rem; }
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    padding: 2rem;
+    padding: 1rem;
     background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -1936,49 +1903,6 @@ h5 { font-size: 1.25rem; }
     
     .footer-content {
         grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .hero {
-        padding: 100px 0 60px;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .topic-section {
-        padding: 60px 0;
-    }
-    
-    .pillar-card,
-    .insight-card,
-    .check-in-card {
-        padding: 1.5rem;
-    }
-    
-    .wellness-meter {
-        width: 250px;
-        height: 250px;
-    }
-    
-    .factor {
-        padding: 0.75rem;
-    }
-    
-    .question-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    
-    .rating-scale {
-        align-self: flex-end;
     }
 }
 
