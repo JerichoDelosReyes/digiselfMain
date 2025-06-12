@@ -1669,7 +1669,7 @@ h5 { font-size: 1.25rem; }
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
-    padding: 2rem;
+    padding: 0.5rem;
     background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
@@ -1744,13 +1744,16 @@ h5 { font-size: 1.25rem; }
 }
 
 .nav-card.back .nav-content {
-    align-items: center;
+    align-items: baseline;
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 .nav-card.next .nav-content {
-    align-items: center;
+    align-items: flex-end;
     text-align: center;
+    margin-bottom: 2rem;
+
 }
 
 .nav-content h3 {
