@@ -1772,7 +1772,7 @@ h5 { font-size: 1.25rem; }
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     transition: color 0.3s ease;
     font-family: var(--font-primary);
-    margin-top: -4px;
+    margin-top: -3px;
 }
 
 .nav-card:hover .nav-content h3 {
