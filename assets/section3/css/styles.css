@@ -2629,3 +2629,62 @@ body::after {
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
 }
+
+/* Section 3 - Responsive Styles */
+@media (max-width: 900px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+    gap: 2rem;
+    text-align: center;
+  }
+  .hero-content {
+    align-items: center;
+  }
+  .hero-visual {
+    margin: 0 auto;
+    order: 2;
+  }
+  .principle-orbit {
+    order: 3;
+    margin-top: 2rem;
+  }
+  .purpose-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  .purpose-text, .purpose-header {
+    align-items: center;
+    text-align: center;
+  }
+  .purpose-visual {
+    margin: 0 auto;
+    order: 2;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 60px 0 40px;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .purpose-section {
+    padding: 60px 0;
+  }
+  .purpose-question {
+    font-size: 1.5rem;
+  }
+  .hero-visual, .principle-orbit, .purpose-visual {
+    width: 100%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
