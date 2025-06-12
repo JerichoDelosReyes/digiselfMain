@@ -348,7 +348,7 @@ body {
     opacity: 1;
     visibility: visible;
     transition: all var(--duration-slow) ease;
-    z-index: var(--z-modal-backdrop);
+    z-index: 9999; /* Below hamburger but above navbar */
     
     /* Safe area support */
     padding-top: var(--safe-area-inset-top);
@@ -379,7 +379,7 @@ body {
         opacity: 0;
         visibility: hidden;
         transition: all var(--duration-slow) ease;
-        z-index: var(--z-modal-backdrop);
+        z-index: 9999; /* Below hamburger but above navbar */
         
         /* Safe area support */
         padding-top: var(--safe-area-inset-top);
@@ -391,9 +391,9 @@ body {
         opacity: 1;
         visibility: visible;
     }
-    
-    .hamburger {
+      .hamburger {
         display: flex;
+        z-index: 10000; /* Highest z-index to stay above mobile menu */
     }
     
     .nav-link {

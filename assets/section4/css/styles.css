@@ -1479,6 +1479,7 @@ h5 { font-size: 1.25rem; }
 @media (max-width: 900px) {
   .hamburger {
     display: flex;
+    z-index: 10000; /* Highest z-index to stay above mobile menu */
   }
   .nav-menu {
     position: fixed;
@@ -1497,7 +1498,7 @@ h5 { font-size: 1.25rem; }
     opacity: 0;
     visibility: hidden;
     transition: all 0.5s ease;
-    z-index: 10000;
+    z-index: 9999; /* Below hamburger but above navbar */
     list-style: none;
     margin: 0;
     padding: 0;
