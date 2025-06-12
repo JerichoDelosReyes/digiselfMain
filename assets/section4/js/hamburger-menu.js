@@ -1,5 +1,4 @@
-// Copied from landing page hamburger-fixed.js
-// Simplified and Fixed Hamburger Menu Implementation
+// Simplified and Fixed Hamburger Menu Implementation for Section 2 (copied to other sections)
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
