@@ -132,14 +132,12 @@ class NavigationController {
         this.navLinks = document.querySelectorAll('.nav-link');
         this.navbar = document.querySelector('.navbar');
         this.init();
-    }
-
-    init() {
-        this.setupHamburgerMenu();
+    }    init() {
+        // Skip hamburger setup since it's handled by hamburger-menu.js
         this.setupSmoothScrolling();
         this.setupScrollEffects();
         this.setupKeyboardNavigation();
-    }    setupHamburgerMenu() {
+    }setupHamburgerMenu() {
         if (!this.hamburger || !this.navMenu) return;
 
         this.hamburger.addEventListener('click', (e) => {
