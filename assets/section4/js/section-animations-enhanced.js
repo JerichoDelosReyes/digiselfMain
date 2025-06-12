@@ -701,24 +701,44 @@ class ScreenTimeTracker {    constructor() {
         // Calculate max value for scaling
         const maxValue = Math.max(...this.weeklyData.map(day => 
             day.socialMedia + day.work + day.entertainment + day.communication
-        ), 8); // Minimum scale of 8 hours
-
-        // Responsive spacing and font sizes
+        ), 8); // Minimum scale of 8 hours        // Responsive spacing and font sizes
         const isMobile = window.innerWidth <= 768;
         const isSmallMobile = window.innerWidth <= 480;
         
+        const leftPadding = 35; // Space for Y-axis labels
         const bottomPadding = isMobile ? 25 : 30;
         const topPadding = 10;
         const chartHeight = height - bottomPadding - topPadding;
+        const chartWidth = width - leftPadding - 10; // 10px right padding
+        
+        // Draw Y-axis hour labels
+        ctx.fillStyle = '#6b7280';
+        ctx.font = `${isSmallMobile ? 8 : 9}px Arial`;
+        ctx.textAlign = 'right';
+        
+        // Draw hour markers (0, 2, 4, 6, 8+ hours)
+        const hourMarkers = [0, 2, 4, 6, 8];
+        hourMarkers.forEach(hour => {
+            if (hour <= maxValue) {
+                const y = height - bottomPadding - (hour / maxValue) * chartHeight;
+                ctx.fillText(`${hour}h`, leftPadding - 5, y + 3);
+                
+                // Draw grid line
+                ctx.strokeStyle = 'rgba(107, 114, 128, 0.2)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(leftPadding, y);
+                ctx.lineTo(width - 10, y);
+                ctx.stroke();
+            }
+        });
         
         // Calculate bar dimensions
         const totalBars = this.weeklyData.length;
-        const availableWidth = width - 20; // 10px padding on each side
+        const availableWidth = chartWidth - 20; // 10px padding on each side
         const barWidth = Math.max(availableWidth / totalBars * 0.7, 20);
-        const spacing = (availableWidth - (barWidth * totalBars)) / (totalBars + 1);
-
-        this.weeklyData.forEach((day, index) => {
-            const x = 10 + spacing + (index * (barWidth + spacing));
+        const spacing = (availableWidth - (barWidth * totalBars)) / (totalBars + 1);        this.weeklyData.forEach((day, index) => {
+            const x = leftPadding + 10 + spacing + (index * (barWidth + spacing));
             const total = day.socialMedia + day.work + day.entertainment + day.communication;
 
             // Stack the bars
@@ -755,45 +775,10 @@ class ScreenTimeTracker {    constructor() {
                 ctx.font = `${fontSize - 1}px Arial`;
                 const totalLabel = `${total.toFixed(1)}h`;
                 ctx.fillText(totalLabel, x + barWidth / 2, topPadding + 10);
-            }
-        });
+            }        });
 
-        // Add legend for mobile
-        if (isMobile) {
-            this.drawMobileLegend(ctx, width, height);
-        }
-    }
-
-    drawMobileLegend(ctx, width, height) {
-        const categories = [
-            { color: '#6366f1', label: 'Work' },
-            { color: '#10b981', label: 'Social' },
-            { color: '#f59e0b', label: 'Entertainment' },
-            { color: '#ef4444', label: 'Communication' }
-        ];
-
-        const legendY = height - 5;
-        const legendItemWidth = width / categories.length;
-        const fontSize = window.innerWidth <= 480 ? 7 : 8;
-
-        categories.forEach((category, index) => {
-            const x = index * legendItemWidth + legendItemWidth / 2;
-            
-            // Draw color dot
-            ctx.fillStyle = category.color;
-            ctx.beginPath();
-            ctx.arc(x - 15, legendY - 3, 3, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            // Draw label
-            ctx.fillStyle = '#6b7280';
-            ctx.font = `${fontSize}px Arial`;
-            ctx.textAlign = 'left';
-            ctx.fillText(category.label, x - 10, legendY);
-        });
-    }
-
-    showLogSuccess() {
+        // Chart is complete - no legend needed
+    }    showLogSuccess() {
         if (!this.logButton) return;
         
         const originalText = this.logButton.textContent;
