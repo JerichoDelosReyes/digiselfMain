@@ -2786,13 +2786,13 @@ body {
 }
 
 .nav-card.back {
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: row;
 }
 
 .nav-card.next {
-    justify-content: center;
-    flex-direction: row-reverse;
+    justify-content: flex-end;
+    flex-direction: row;
 }
 
 .nav-icon {
@@ -2817,7 +2817,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
+}
+
+.nav-card.back .nav-content {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.nav-card.next .nav-content {
+    align-items: flex-end;
+    text-align: right;
 }
 
 .nav-content h3 {
