@@ -362,8 +362,7 @@ class WellnessAssessment {
 }
 
 // Screen Time Tracker
-class ScreenTimeTracker {
-    constructor() {
+class ScreenTimeTracker {    constructor() {
         this.container = document.querySelector('.tracker-container');
         this.inputs = {
             socialMedia: document.getElementById('social-media-time'),
@@ -376,14 +375,215 @@ class ScreenTimeTracker {
         this.chart = document.getElementById('screen-time-chart');
         this.recommendationsList = document.querySelector('.recommendations-list');
         this.weeklyData = Utils.loadFromLocalStorage('screen_time_data', []);
+        
+        // Add sample data if no data exists
+        if (this.weeklyData.length === 0) {
+            this.initializeSampleData();
+        }
+        
         this.init();
+    }    init() {
+        if (!this.container) return;
+        
+        // Ensure DOM is ready before setting up canvas
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.setupCanvas();
+                this.setupEventListeners();
+                this.updateVisualization();
+                this.loadTodaysData();
+            });
+        } else {
+            this.setupCanvas();
+            this.setupEventListeners();
+            this.updateVisualization();
+            this.loadTodaysData();
+        }
+    }    initializeSampleData() {
+        // Create sample data for the last 7 days
+        const today = new Date();
+        const sampleData = [];
+        
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date(today);
+            date.setDate(date.getDate() - i);
+            
+            sampleData.push({
+                date: date.toISOString().split('T')[0],
+                socialMedia: Math.random() * 3 + 0.5, // 0.5-3.5 hours
+                work: Math.random() * 4 + 2, // 2-6 hours
+                entertainment: Math.random() * 2 + 0.5, // 0.5-2.5 hours
+                communication: Math.random() * 1 + 0.2 // 0.2-1.2 hours
+            });
+        }
+        
+        this.weeklyData = sampleData;
+        Utils.saveToLocalStorage('screen_time_data', this.weeklyData);
+        
+        // Show a brief notification that sample data was loaded
+        this.showSampleDataNotification();
     }
 
-    init() {
-        if (!this.container) return;
-        this.setupEventListeners();
-        this.updateVisualization();
-        this.loadTodaysData();
+    showSampleDataNotification() {
+        const container = document.querySelector('.chart-container');
+        if (!container) return;
+        
+        const notification = document.createElement('div');
+        notification.className = 'sample-data-notification';
+        notification.textContent = 'Sample data loaded for demonstration';
+        notification.style.cssText = `
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(99, 102, 241, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        
+        container.style.position = 'relative';
+        container.appendChild(notification);
+        
+        // Fade in and out
+        setTimeout(() => notification.style.opacity = '1', 100);
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                if (container.contains(notification)) {
+                    container.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+
+    setupCanvas() {
+        if (!this.chart) return;
+        
+        // Set up responsive canvas
+        this.resizeCanvas();
+        
+        // Add resize observer for better responsiveness
+        if (window.ResizeObserver) {
+            try {
+                this.resizeObserver = new ResizeObserver(Utils.debounce(() => {
+                    this.resizeCanvas();
+                    this.updateVisualization();
+                }, 150));
+                
+                const chartContainer = this.chart.parentElement;
+                if (chartContainer) {
+                    this.resizeObserver.observe(chartContainer);
+                }
+            } catch (error) {
+                console.warn('ResizeObserver not supported or failed to initialize:', error);
+            }
+        }
+
+        // Add touch-friendly interactions for mobile
+        this.setupMobileInteractions();
+    }
+
+    setupMobileInteractions() {
+        if (!this.chart) return;
+
+        // Add touch event handling for mobile chart interaction
+        let touchStartX = null;
+        let touchStartY = null;
+
+        this.chart.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+        }, { passive: false });
+
+        this.chart.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            if (touchStartX !== null && touchStartY !== null) {
+                // Simple tap detection - could be expanded for chart interaction
+                const rect = this.chart.getBoundingClientRect();
+                const x = touchStartX - rect.left;
+                const y = touchStartY - rect.top;
+                
+                // You could add chart interaction logic here
+                // For now, just show a brief highlight effect
+                this.showChartInteraction(x, y);
+            }
+            touchStartX = null;
+            touchStartY = null;
+        }, { passive: false });
+    }
+
+    showChartInteraction(x, y) {
+        // Add a brief visual feedback for touch interaction
+        const canvas = this.chart;
+        const ctx = canvas.getContext('2d');
+        
+        // Save current state
+        ctx.save();
+        
+        // Draw interaction indicator
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = '#6366f1';
+        ctx.beginPath();
+        ctx.arc(x, y, 15, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Restore and fade out
+        setTimeout(() => {        ctx.restore();
+            this.updateVisualization(); // Redraw to remove indicator
+        }, 200);
+    }
+
+    resizeCanvas() {
+        if (!this.chart) return;
+        
+        const container = this.chart.parentElement;
+        if (!container) return;
+        
+        // Get container dimensions
+        const containerRect = container.getBoundingClientRect();
+        const containerWidth = containerRect.width - 32; // Account for padding
+        
+        // Calculate responsive dimensions
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        let canvasWidth, canvasHeight;
+        
+        if (isSmallMobile) {
+            canvasWidth = Math.min(containerWidth, 280);
+            canvasHeight = 160;
+        } else if (isMobile) {
+            canvasWidth = Math.min(containerWidth, 350);
+            canvasHeight = 180;
+        } else {
+            canvasWidth = Math.min(containerWidth, 400);
+            canvasHeight = 200;
+        }
+        
+        // Handle high-DPI displays
+        const devicePixelRatio = window.devicePixelRatio || 1;
+        
+        // Set actual canvas size (for drawing)
+        this.chart.width = canvasWidth * devicePixelRatio;
+        this.chart.height = canvasHeight * devicePixelRatio;
+        
+        // Set displayed canvas size (CSS)
+        this.chart.style.width = canvasWidth + 'px';
+        this.chart.style.height = canvasHeight + 'px';
+        
+        // Scale the drawing context to match device pixel ratio
+        const ctx = this.chart.getContext('2d');
+        ctx.scale(devicePixelRatio, devicePixelRatio);
+        
+        // Store dimensions for drawing calculations
+        this.drawingWidth = canvasWidth;
+        this.drawingHeight = canvasHeight;
     }
 
     setupEventListeners() {
@@ -472,8 +672,7 @@ class ScreenTimeTracker {
     loadTodaysData() {
         const today = new Date().toISOString().split('T')[0];
         const todaysData = this.weeklyData.find(entry => entry.date === today);
-        
-        if (todaysData) {
+          if (todaysData) {
             Object.entries(this.inputs).forEach(([key, input]) => {
                 if (input && todaysData[key]) {
                     input.value = todaysData[key];
@@ -481,14 +680,20 @@ class ScreenTimeTracker {
             });
             this.updateTotal();
         }
-    }
+    }    updateVisualization() {
+        if (!this.chart) return;
+        
+        // If no data, show the sample data
+        if (this.weeklyData.length === 0) {
+            this.initializeSampleData();
+        }
 
-    updateVisualization() {
-        if (!this.chart || this.weeklyData.length === 0) return;
+        // Ensure canvas is properly sized
+        this.resizeCanvas();
 
         const ctx = this.chart.getContext('2d');
-        const width = this.chart.width;
-        const height = this.chart.height;
+        const width = this.drawingWidth || this.chart.width;
+        const height = this.drawingHeight || this.chart.height;
 
         // Clear canvas
         ctx.clearRect(0, 0, width, height);
@@ -496,44 +701,95 @@ class ScreenTimeTracker {
         // Calculate max value for scaling
         const maxValue = Math.max(...this.weeklyData.map(day => 
             day.socialMedia + day.work + day.entertainment + day.communication
-        ));
+        ), 8); // Minimum scale of 8 hours
 
-        if (maxValue === 0) return;
-
-        // Draw bars
-        const barWidth = width / this.weeklyData.length * 0.8;
-        const spacing = width / this.weeklyData.length * 0.2;
+        // Responsive spacing and font sizes
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        const bottomPadding = isMobile ? 25 : 30;
+        const topPadding = 10;
+        const chartHeight = height - bottomPadding - topPadding;
+        
+        // Calculate bar dimensions
+        const totalBars = this.weeklyData.length;
+        const availableWidth = width - 20; // 10px padding on each side
+        const barWidth = Math.max(availableWidth / totalBars * 0.7, 20);
+        const spacing = (availableWidth - (barWidth * totalBars)) / (totalBars + 1);
 
         this.weeklyData.forEach((day, index) => {
-            const x = index * (barWidth + spacing) + spacing / 2;
+            const x = 10 + spacing + (index * (barWidth + spacing));
             const total = day.socialMedia + day.work + day.entertainment + day.communication;
-            const barHeight = (total / maxValue) * (height - 40);
 
             // Stack the bars
-            let currentY = height - 20;
+            let currentY = height - bottomPadding;
             const categories = [
-                { value: day.work, color: '#6366f1' },
-                { value: day.socialMedia, color: '#10b981' },
-                { value: day.entertainment, color: '#f59e0b' },
-                { value: day.communication, color: '#ef4444' }
+                { value: day.work, color: '#6366f1', label: 'Work' },
+                { value: day.socialMedia, color: '#10b981', label: 'Social' },
+                { value: day.entertainment, color: '#f59e0b', label: 'Entertainment' },
+                { value: day.communication, color: '#ef4444', label: 'Communication' }
             ];
 
             categories.forEach(category => {
                 if (category.value > 0) {
-                    const segmentHeight = (category.value / maxValue) * (height - 40);
+                    const segmentHeight = (category.value / maxValue) * chartHeight;
                     ctx.fillStyle = category.color;
                     ctx.fillRect(x, currentY - segmentHeight, barWidth, segmentHeight);
                     currentY -= segmentHeight;
                 }
             });
 
-            // Draw date label
+            // Draw date label with responsive font size
             ctx.fillStyle = '#6b7280';
-            ctx.font = '10px Arial';
+            const fontSize = isSmallMobile ? 8 : isMobile ? 9 : 10;
+            ctx.font = `${fontSize}px Arial`;
             ctx.textAlign = 'center';
+            
             const date = new Date(day.date);
             const dayLabel = date.toLocaleDateString('en', { weekday: 'short' });
-            ctx.fillText(dayLabel, x + barWidth / 2, height - 5);
+            ctx.fillText(dayLabel, x + barWidth / 2, height - 8);
+
+            // Add total time label on mobile for better readability
+            if (isMobile && total > 0) {
+                ctx.fillStyle = '#374151';
+                ctx.font = `${fontSize - 1}px Arial`;
+                const totalLabel = `${total.toFixed(1)}h`;
+                ctx.fillText(totalLabel, x + barWidth / 2, topPadding + 10);
+            }
+        });
+
+        // Add legend for mobile
+        if (isMobile) {
+            this.drawMobileLegend(ctx, width, height);
+        }
+    }
+
+    drawMobileLegend(ctx, width, height) {
+        const categories = [
+            { color: '#6366f1', label: 'Work' },
+            { color: '#10b981', label: 'Social' },
+            { color: '#f59e0b', label: 'Entertainment' },
+            { color: '#ef4444', label: 'Communication' }
+        ];
+
+        const legendY = height - 5;
+        const legendItemWidth = width / categories.length;
+        const fontSize = window.innerWidth <= 480 ? 7 : 8;
+
+        categories.forEach((category, index) => {
+            const x = index * legendItemWidth + legendItemWidth / 2;
+            
+            // Draw color dot
+            ctx.fillStyle = category.color;
+            ctx.beginPath();
+            ctx.arc(x - 15, legendY - 3, 3, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw label
+            ctx.fillStyle = '#6b7280';
+            ctx.font = `${fontSize}px Arial`;
+            ctx.textAlign = 'left';
+            ctx.fillText(category.label, x - 10, legendY);
         });
     }
 
@@ -548,6 +804,13 @@ class ScreenTimeTracker {
             this.logButton.textContent = originalText;
             this.logButton.style.background = '';
         }, 2000);
+    }
+
+    cleanup() {
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+            this.resizeObserver = null;
+        }
     }
 }
 
@@ -566,27 +829,49 @@ class MindfulnessController {
         if (!this.exerciseContainer) return;
         this.setupTabNavigation();
         this.setupExerciseButtons();
-    }
-
-    setupTabNavigation() {
+    }    setupTabNavigation() {
         this.tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
                 const targetTab = button.getAttribute('data-tab');
                 this.switchTab(targetTab);
             });
         });
-    }
-
-    switchTab(targetTab) {
+        
+        // Initialize with the first tab active
+        if (this.tabButtons.length > 0) {
+            const firstTab = this.tabButtons[0].getAttribute('data-tab');
+            this.switchTab(firstTab);
+        }
+    }    switchTab(targetTab) {
         // Update button states
         this.tabButtons.forEach(btn => {
             btn.classList.toggle('active', btn.getAttribute('data-tab') === targetTab);
         });
 
-        // Update panel visibility
+        // Map data-tab values to panel IDs
+        const panelMap = {
+            'breath': 'breath-panel',
+            'body': 'body-panel',
+            'consumption': 'consumption-panel',
+            'disconnect': 'disconnect-panel'
+        };
+
+        const targetPanelId = panelMap[targetTab];
+
+        // First hide all panels
         this.exercisePanels.forEach(panel => {
-            panel.classList.toggle('active', panel.id === `${targetTab}-panel`);
+            panel.classList.remove('active');
         });
+
+        // Then show the target panel after a brief delay for smooth transition
+        setTimeout(() => {
+            this.exercisePanels.forEach(panel => {
+                if (panel.id === targetPanelId) {
+                    panel.classList.add('active');
+                }
+            });
+        }, 50);
     }
 
     setupExerciseButtons() {
