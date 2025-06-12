@@ -1859,7 +1859,7 @@ body::after {
 /* Section Navigation - Enhanced Responsive */
 .section-navigation {
     padding: 3rem 0;
-    background: linear-gradient(135deg, #0a0a0f 0%, #1a1f2e 50%, #16213e 100%);
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
@@ -1887,6 +1887,7 @@ body::after {
 .nav-card {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1.5rem;
     padding: 2rem;
     background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(22, 33, 62, 0.8) 100%);
@@ -1900,6 +1901,7 @@ body::after {
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    min-height: 120px;
 }
 
 .nav-card::before {
@@ -1926,11 +1928,12 @@ body::after {
 
 .nav-card.back {
     justify-content: flex-start;
+    flex-direction: row;
 }
 
 .nav-card.next {
     justify-content: flex-end;
-    text-align: right;
+    flex-direction: row;
 }
 
 .nav-icon {
@@ -1949,6 +1952,24 @@ body::after {
 .nav-card:hover .nav-icon {
     transform: scale(1.2);
     text-shadow: 0 0 30px rgba(100, 149, 237, 0.5);
+}
+
+.nav-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nav-card.back .nav-content {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.nav-card.next .nav-content {
+    align-items: flex-end;
+    text-align: right;
 }
 
 .nav-content h3 {
@@ -2004,6 +2025,11 @@ body::after {
     
     .nav-card:hover {
         transform: none;
+    }
+    
+    .nav-card::before,
+    .nav-card:hover::before {
+        display: none;
     }
 }
 
