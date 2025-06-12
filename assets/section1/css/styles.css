@@ -565,6 +565,7 @@ body {
 }
 
 .section-badge {
+    margin-top: 2rem;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -587,7 +588,7 @@ body {
 /* Mobile responsive section badge */
 @media (max-width: 768px) {
     .section-badge {
-        margin-top: 4rem;
+        margin-top: 8rem;
         padding: 0.6rem 1.2rem;
         font-size: 0.8rem;
         margin-bottom: var(--gap-sm);
@@ -596,7 +597,7 @@ body {
 
 @media (max-width: 480px) {
     .section-badge {
-        margin-top: 4rem;
+        margin-top: 8rem;
         padding: 0.5rem 1rem;
         font-size: 0.75rem;
         gap: 0.4rem;
@@ -605,7 +606,7 @@ body {
 
 @media (max-width: 320px) {
     .section-badge {
-        margin-top: 4rem;
+        margin-top: 8rem;
         padding: 0.4rem 0.8rem;
         font-size: 0.7rem;
         gap: 0.3rem;

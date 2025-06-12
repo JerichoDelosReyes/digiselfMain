@@ -224,21 +224,21 @@ h5 { font-size: 1.25rem; }
     gap: 4px;
     padding: 8px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(10, 15, 28, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
 }
 
 .hamburger:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(10, 15, 28, 0.9);
     transform: scale(1.05);
 }
 
 .bar {
     width: 25px;
     height: 3px;
-    background: var(--text-primary);
+    background: #ffffff;
     transition: all 0.3s ease;
     border-radius: 3px;
     transform-origin: center;
@@ -1854,6 +1854,21 @@ h5 { font-size: 1.25rem; }
 }
 
 @media (max-width: 768px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-content {
+        text-align: center;
+    }
+    
+    .section-badge {
+        margin: 0 auto 1.5rem auto;
+        width: fit-content;
+    }
+    
     .hero-title {
         font-size: 2.5rem;
     }
@@ -1866,8 +1881,7 @@ h5 { font-size: 1.25rem; }
     .wellness-meter {
         width: 300px;
         height: 300px;
-    }
-      .nav-menu {
+    }    .nav-menu {
         position: fixed;
         top: 0;
         right: 0;
@@ -1884,7 +1898,10 @@ h5 { font-size: 1.25rem; }
         opacity: 0;
         visibility: hidden;
         transition: all 0.4s ease;
-        z-index: 1000;
+        z-index: 9999;
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
     
     .nav-menu.active {
@@ -1895,6 +1912,8 @@ h5 { font-size: 1.25rem; }
     
     .hamburger {
         display: flex;
+        z-index: 10000;
+        position: relative;
     }
     
     .nav-link {
