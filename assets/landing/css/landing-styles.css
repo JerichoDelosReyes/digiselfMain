@@ -1017,7 +1017,6 @@ body {
 
 /* References Section */
 .references-section {
-    padding: var(--section-padding);
     background: var(--bg-primary);
 }
 
@@ -2169,4 +2168,25 @@ body {
         height: 80px;
         margin-bottom: 1rem;
     }
+}
+
+/* Back to Top Button */
+.back-to-top-btn {
+  display: inline-block;
+  background: var(--gradient-primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.15);
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 1.5rem;
+}
+
+.back-to-top-btn:hover {
+  background: var(--gradient-secondary);
+  transform: translateY(-3px) scale(1.04);
+  color: #fff;
 }
