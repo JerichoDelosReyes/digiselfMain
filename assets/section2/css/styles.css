@@ -1314,6 +1314,23 @@ body {
     font-size: 0.9rem;
 }
 
+/* Mobile Footer Styles */
+@media (max-width: 768px) {
+    .section-footer {
+        text-align: center;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+}
+
 /* Performance and accessibility optimizations */
 @media (prefers-reduced-motion: reduce) {
     *,

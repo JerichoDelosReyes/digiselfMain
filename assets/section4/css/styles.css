@@ -2818,14 +2818,24 @@ h5 { font-size: 1.25rem; }
         padding: 2rem 1rem;
     }
     
+    .hero-content {
+        text-align: center;
+    }
+    
+    .section-badge {
+        margin: 0 auto 1.5rem auto;
+    }
+    
     .hero-title {
         font-size: 2.2rem;
         line-height: 1.2;
+        text-align: center;
     }
     
     .hero-subtitle {
         font-size: 1rem;
         line-height: 1.6;
+        text-align: center;
     }
     
     .hero-stats {
